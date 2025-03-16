@@ -10,7 +10,7 @@ import {
   DefinitionType,
 } from "@reduxjs/toolkit/query/react";
 import { toast } from "sonner";
-import { setUser } from "../features/auth/authSlice";
+import { logOut, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3000/api",

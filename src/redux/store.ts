@@ -9,18 +9,14 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { baseApi } from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
-import { cartSlice } from "./features/cart/cartSlice";
+import { baseApi } from "./api/baseApi";
 import { auth } from "./features/auth/authSlice";
-import { productSlice } from "./features/products/productSlice";
 
 // Root Reducer
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   auth: auth.reducer,
-  cart: cartSlice.reducer,
-  product: productSlice.reducer,
 });
 
 const persistConfig = {
