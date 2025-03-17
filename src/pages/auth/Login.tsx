@@ -5,6 +5,7 @@ import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { toast } from "sonner";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { verifyToken } from "@/utils/verifyToken";
+import loginImage from "../../assets/images/login.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,11 +46,11 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center overflow-hidden font-orbitron">
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-screen-lg rounded-lg overflow-hidden shadow-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-screen-lg rounded-xl overflow-hidden shadow-xl">
         {/* Left Side: Image */}
         <div className="relative">
           <img
-            src="https://res.cloudinary.com/dzhou2pgk/image/upload/v1740090362/shoes.jpg"
+            src={loginImage}
             alt="Login"
             className="w-full h-full object-cover"
           />
@@ -97,17 +98,17 @@ const Login = () => {
             <div className="flex justify-center mt-4">
               <button
                 type="submit"
-                className="bg-primary-bg text-black py-2 px-6 rounded-lg w-full hover:bg-secondary transition"
+                className="bg-primary-bg border border-gray-300 text-black py-2 px-6 rounded-lg w-full hover:bg-secondary transition"
               >
                 Login
               </button>
             </div>
           </form>
 
-          <div className="text-[10px] font-bold text-red-600">
-            Don't have an account?{" "}
+          <div className="text-[12px] font-bold text-red-400">
+            Don't have an any account??{" "}
             <a href="/register" className="text-blue-600 hover:underline">
-              Register here
+              Register first
             </a>
           </div>
         </div>
