@@ -1,4 +1,6 @@
 import { baseApi } from "@/redux/api/baseApi";
+import { TReponseRedux } from "@/types/globalTypes";
+import { TUser } from "@/types/userTypes";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -20,7 +22,24 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+
+    // get me
+    getMe: builder.query({
+      query: () => {
+        return {
+          url: "/users/me",
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
+      transformResponse: (response: TReponseRedux<TUser>) => {
+        return {
+          data: response?.data,
+          meta: response?.meta,
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useGetMeQuery, useRegisterMutation } = authApi;
