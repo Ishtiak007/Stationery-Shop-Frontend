@@ -10,6 +10,16 @@ const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    // register
+    register: builder.mutation({
+      query: (data) => ({
+        url: "/users/create-user",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
