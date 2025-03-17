@@ -39,7 +39,29 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    // all user
+    AllUsers: builder.query({
+      query: () => {
+        return {
+          url: "/users/all-users",
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
+      transformResponse: (response: TReponseRedux<TUser>) => {
+        return {
+          data: response?.data,
+          meta: response.meta,
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery, useRegisterMutation } = authApi;
+export const {
+  useLoginMutation,
+  useGetMeQuery,
+  useRegisterMutation,
+  useAllUsersQuery,
+} = authApi;
