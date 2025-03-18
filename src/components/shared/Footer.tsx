@@ -5,6 +5,7 @@ import {
   BsTwitter,
   BsPinterest,
 } from "react-icons/bs";
+import logo from "../../assets/images/logo.png";
 
 const Footer = () => {
   return (
@@ -17,11 +18,7 @@ const Footer = () => {
       <div className="grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 place-items-start gap-8 text-white">
         <div>
           <div className="flex justify-center items-center">
-            <img
-              className="w-[70px] h-[50px]"
-              src="https://react-icons.github.io/react-icons/"
-              alt="logo"
-            />
+            <img className="size-20" src={logo} alt="logo" />
             <p className="text-3xl font-semibold">Stationery Shop</p>
           </div>
 
