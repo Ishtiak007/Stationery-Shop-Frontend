@@ -2,11 +2,9 @@
 // @typescript-eslint/no-explicit-any
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ShoppingCart, User } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 
-import { BiLogOut } from "react-icons/bi";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
-
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logOut, useCurrentToken } from "@/redux/features/auth/authSlice";
 import { useGetMeQuery } from "@/redux/features/auth/authApi";
@@ -57,39 +55,38 @@ const Navbar = () => {
 
   const [position, setPosition] = useState("bottom");
   return (
-    <nav className="bg-gray-200 dark:bg-gray-900 text-black dark:text-white  font-orbitron border-2 border-radius-2xl  overflow-hidden shadow-lg z-10 w-full">
+    <nav className="fixed bg-opacity-50 bg-teal-800 dark:bg-gray-900 text-black dark:text-white  font-orbitron  border-radius-2xl  overflow-hidden shadow-lg z-10 w-full">
       {/* Container */}
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+      <div className="container mx-auto flex justify-around items-center py-4 px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <span className="text-black  font-orbitron text-[8px] md:text:sm lg:text-xl font-bold ml-2">
-            Stationery Shop
+          <span className="text-black  font-mono text-[8px] md:text:sm lg:text-xl font-bold ml-2">
+            STATIONERY STORE
           </span>
         </Link>
 
         {/* Desktop Search Bar */}
         <div className="hidden lg:flex items-center w-1/3">
-          <div>
-            <div className="space-x-2 p-2 md:flex items-center justify-center text-black">
-              <button className="bg-blue-200">
-                <Link to={"/"}>Home</Link>
-              </button>
-              <button className="bg-blue-200">
-                <Link to={"/all-product"}>Products</Link>
-              </button>
-              <button className="bg-blue-200">
-                <Link to={"/about"}>About</Link>
-              </button>
-            </div>
+          <div className="space-x-6 p-2 md:flex items-center justify-center text-black">
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+              <Link to={"/"}>Home</Link>
+            </button>
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+              <Link to={"/all-product"}>Products</Link>
+            </button>
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+              <Link to={"/about"}>About</Link>
+            </button>
           </div>
+
           {/* <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600" /> */}
         </div>
 
         {/* Icons and Menu */}
-        <div className="flex items-center md:space-x-4">
+        <div className="flex items-center justify-center md:space-x-4">
           <Link to="/cart" className="relative">
-            <ShoppingCart size={20} />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <HiOutlineShoppingBag size={25} />
+            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               {cartCount}
             </span>
           </Link>
@@ -102,7 +99,7 @@ const Navbar = () => {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <User size={28} />
+                          <User size={30} />
                         </TooltipTrigger>
                         <TooltipContent>
                           <p className="font-orbitron font-bold uppercase">
@@ -113,6 +110,7 @@ const Navbar = () => {
                     </TooltipProvider>
                   </Button>
                 </DropdownMenuTrigger>
+
                 <DropdownMenuContent className="w-56 font-orbitron">
                   {/* <DropdownMenuLabel className="mt-2">Panel Position</DropdownMenuLabel> */}
                   <DropdownMenuSeparator />
@@ -122,21 +120,9 @@ const Navbar = () => {
                   >
                     <DropdownMenuRadioItem value="bottom">
                       {/* dashboard */}
-
                       <Link to={dashboardLink}>
                         <Button variant={"outline"}>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <MdOutlineSpaceDashboard className="text-blue-700" />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p className="font-bold font-orbitron">
-                                  Dashboard
-                                </p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                          <p className="font-bold font-orbitron">Dashboard</p>
                         </Button>
                       </Link>
                     </DropdownMenuRadioItem>
@@ -144,16 +130,7 @@ const Navbar = () => {
                     <DropdownMenuRadioItem value="right">
                       {/* log out */}
                       <Button onClick={handleLogOut} variant={"outline"}>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <BiLogOut className="text-blue-800" />
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p className="font-bold font-orbitron">Log Out</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
+                        <p className="font-bold font-orbitron">Log Out</p>
                       </Button>
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
