@@ -46,10 +46,7 @@ const Banner = () => {
 
         {/* Search Bar */}
         <div className="flex z-20 items-center justify-center max-w-lg md:w-full text-[10px] md:text-sm lg:text-base">
-          <button
-            type="submit"
-            className="bg-purple-600 hover:bg-purple-700 px-4 py-2 text-white font-semibold rounded-r-md"
-          >
+          <button type="submit" className="banner-button">
             Join Now
           </button>
         </div>
