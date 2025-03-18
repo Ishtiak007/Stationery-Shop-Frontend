@@ -2,8 +2,8 @@
 // @typescript-eslint/no-explicit-any
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, User } from "lucide-react";
-
+import { Menu, X } from "lucide-react";
+import { FaRegUser } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logOut, useCurrentToken } from "@/redux/features/auth/authSlice";
@@ -66,7 +66,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Search Bar */}
-        <div className="hidden lg:flex items-center w-1/3">
+        <div className="hidden lg:flex justify-center items-center w-1/3">
           <div className="space-x-6 p-2 md:flex items-center justify-center text-black">
             <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/"}>Home</Link>
@@ -99,7 +99,7 @@ const Navbar = () => {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <User size={30} />
+                          <FaRegUser size={30} />
                         </TooltipTrigger>
                         <TooltipContent>
                           <p className="font-orbitron font-bold uppercase">
