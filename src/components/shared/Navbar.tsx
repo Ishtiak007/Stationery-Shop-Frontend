@@ -55,26 +55,26 @@ const Navbar = () => {
 
   const [position, setPosition] = useState("bottom");
   return (
-    <nav className="fixed bg-opacity-50 bg-teal-800 dark:bg-gray-900 text-black dark:text-white  font-orbitron  border-radius-2xl  overflow-hidden shadow-lg z-10 w-full">
+    <nav className="fixed bg-opacity-75 bg-teal-800 dark:bg-gray-900 text-white dark:text-white  overflow-hidden shadow-lg z-10 w-full">
       {/* Container */}
       <div className="container mx-auto flex justify-around items-center py-4 px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <span className="text-black  font-mono text-[8px] md:text:sm lg:text-xl font-bold ml-2">
+          <span className="text-white  font-mono text-[8px] md:text:sm lg:text-xl font-bold ml-2">
             STATIONERY STORE
           </span>
         </Link>
 
         {/* Desktop Search Bar */}
         <div className="hidden lg:flex justify-center items-center w-1/3">
-          <div className="space-x-6 p-2 md:flex items-center justify-center text-black">
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+          <div className="space-x-6 p-2 md:flex items-center justify-center text-white">
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/"}>Home</Link>
             </button>
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/all-product"}>Products</Link>
             </button>
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-[#115E59] after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/about"}>About</Link>
             </button>
           </div>

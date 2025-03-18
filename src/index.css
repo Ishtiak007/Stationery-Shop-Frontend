@@ -6,3 +6,21 @@
 * {
   font-family: "Nunito Sans", sans-serif;
 }
+
+.banner-button {
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: white;
+  font-weight: 300;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transition: 0.4s;
+  border: 1px solid orange;
+}
+.banner-button:hover {
+  color: orange;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid yellowgreen;
+}
