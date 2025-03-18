@@ -1,5 +1,6 @@
 import App from "@/App";
 import Login from "@/pages/auth/Login";
+import Register from "@/pages/auth/Register";
 import Home from "@/pages/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
