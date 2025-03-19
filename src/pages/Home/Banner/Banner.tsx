@@ -30,7 +30,7 @@ const Banner = () => {
       </Carousel>
 
       {/* Banner Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black font-orbitron bg-opacity-50 font-bold">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black font-orbitron bg-opacity-60 font-bold">
         {/* Text */}
         <div className="relative z-0 text-center max-w-4xl px-4 text-[10px] md:text-base lg:text-4xl font-orbitron font-bold">
           <h2 className="pb-2">

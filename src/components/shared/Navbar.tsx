@@ -99,10 +99,10 @@ const Navbar = () => {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <FaRegUser size={30} />
+                          <FaRegUser size={28} />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p className="font-orbitron font-bold uppercase">
+                          <p className="font-orbitron font-bold uppercase text-white">
                             {initials}
                           </p>
                         </TooltipContent>
@@ -111,7 +111,7 @@ const Navbar = () => {
                   </Button>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className="w-56 font-orbitron">
+                <DropdownMenuContent className="w-56 font-orbitron text-white">
                   {/* <DropdownMenuLabel className="mt-2">Panel Position</DropdownMenuLabel> */}
                   <DropdownMenuSeparator />
                   <DropdownMenuRadioGroup
@@ -130,7 +130,7 @@ const Navbar = () => {
                     <DropdownMenuRadioItem value="right">
                       {/* log out */}
                       <Button onClick={handleLogOut} variant={"outline"}>
-                        <p className="font-bold font-orbitron">Log Out</p>
+                        <p className="font-bold font-orbitron">Logout</p>
                       </Button>
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
@@ -139,7 +139,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link to="/register">
-              <User size={24} />
+              <FaRegUser size={20} />
             </Link>
           )}
 
