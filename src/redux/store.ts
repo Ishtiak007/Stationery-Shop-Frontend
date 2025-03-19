@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import { baseApi } from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
+import { cartSlice } from "./features/cart/cartSlice";
 import { auth } from "./features/auth/authSlice";
 import { productSlice } from "./features/products/productSlice";
 
@@ -18,6 +19,7 @@ import { productSlice } from "./features/products/productSlice";
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   auth: auth.reducer,
+  cart: cartSlice.reducer,
   product: productSlice.reducer,
 });
 
