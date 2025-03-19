@@ -27,6 +27,19 @@ const orderApi = baseApi.injectEndpoints({
         };
       },
     }),
+    verifyOrder: builder.query({
+      query: (order_id) => {
+        return {
+          url: "/orders/verification",
+          params: { order_id },
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
-export const { useCreateOrderMutation, useGetOrdersQuery } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetOrdersQuery,
+  useVerifyOrderQuery,
+} = orderApi;
