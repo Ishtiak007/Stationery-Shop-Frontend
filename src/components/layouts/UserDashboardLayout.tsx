@@ -9,6 +9,7 @@ import { FaFirstOrder } from "react-icons/fa";
 import { RiProfileFill } from "react-icons/ri";
 import { MdUpdate } from "react-icons/md";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import ManageUsers from "@/pages/Admin/ManageUsers";
 
 const { Content, Sider } = Layout;
 
@@ -37,16 +38,19 @@ const UserDashboardLayout: FC = () => {
       key: "2",
       icon: <FaFirstOrder />,
       label: "Recent Orders",
+      // component: <ManageOrders />,
     },
     {
       key: "3",
       icon: <RiProfileFill />,
       label: "Profile",
+      // component: <MyProfile />,
     },
     {
       key: "4",
       icon: <MdUpdate />,
       label: "Profile Update",
+      // component: <UpdateProfile />,
     },
   ];
 
