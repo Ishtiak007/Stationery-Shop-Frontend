@@ -1,8 +1,8 @@
 import { useGetMeQuery } from "@/redux/features/auth/authApi";
 import { FaUserPen } from "react-icons/fa6";
 import { Label } from "@/components/ui/label";
-import image from "../../assets/images/blog1.jpg";
 import { Link } from "react-router-dom";
+import Loading from "@/components/ui/Loading";
 
 const MyProfile = () => {
   const { data: myData, isLoading } = useGetMeQuery(undefined, {
@@ -10,7 +10,7 @@ const MyProfile = () => {
   });
 
   if (isLoading) {
-    return <p>Loading........</p>;
+    return <Loading />;
   }
   const { name, email, role, country, city, phone, postalCode, address } =
     myData?.data || {};
@@ -24,8 +24,8 @@ const MyProfile = () => {
         {/* Profile image section */}
         <div className=" mt-6 border rounded-lg border-gray-200 p-4 flex flex-col justify-center items-center">
           <div className=" flex items-center gap-6">
-            <div>
-              <img className=" w-28 h-28 rounded-full" src={image} alt="" />
+            <div className="size-[120px] bg-teal-300 rounded-full flex justify-center items-center">
+              <h1 className="text-center">{name}'s Profile image</h1>
             </div>
             <div className="font-medium text-sm">
               <h2 className="text-3xl ">

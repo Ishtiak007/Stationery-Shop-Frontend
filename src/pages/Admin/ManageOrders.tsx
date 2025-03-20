@@ -73,7 +73,9 @@ const ManageOrders = () => {
         ) : (
           <div className="mt-10">
             {isFetching && (
-              <p className="text-sm text-red-800">Refreshing...</p>
+              <p className="text-sm text-green-600 text-center">
+                Refreshing....
+              </p>
             )}
             <Table>
               <TableHeader>
