@@ -24,7 +24,6 @@ const UserDashboardLayout: FC = () => {
   const handleLogOut = () => {
     dispatch(logOut());
     navigate("/login");
-    d;
   };
 
   const {

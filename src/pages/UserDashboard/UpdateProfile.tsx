@@ -96,8 +96,8 @@ const UpdateProfile = () => {
   }, [getUserInfo, setValue]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
-      <Card className="w-full max-w-lg bg-white shadow-lg rounded-lg p-8 border border-gray-200">
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
+      <Card className="w-full max-w-lg bg-white shadow-md rounded-sm p-8 border border-gray-200">
         <h2 className="text-3xl font-semibold text-gray-800 text-center mb-6">
           Update Profile
         </h2>
