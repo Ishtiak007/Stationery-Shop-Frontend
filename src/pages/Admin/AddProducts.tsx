@@ -2,6 +2,12 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
+import { Store, Check } from "lucide-react";
+import { useAddProductMutation } from "@/redux/features/products/productsApi";
+import { TProducts } from "@/types/productTypes";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -9,13 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { toast } from "sonner";
-import { Store, Check } from "lucide-react";
-import { useAddProductMutation } from "@/redux/features/products/productsApi";
-import { TProducts } from "@/types/productTypes";
-import { Textarea } from "@/components/ui/textarea";
 
 const defaultValues = {
   name: "Elegant Leather Notebook",
