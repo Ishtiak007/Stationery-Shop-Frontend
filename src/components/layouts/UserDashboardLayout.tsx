@@ -1,20 +1,21 @@
 import { FC, useState } from "react";
 import { Layout, Menu, theme } from "antd";
 import Footer from "../shared/Footer";
-import { LogOut, HomeIcon } from "lucide-react";
-import Home from "@/pages/Home/Home";
 import { logOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { FaFirstOrder } from "react-icons/fa";
-import { RiProfileFill } from "react-icons/ri";
-import { MdUpdate } from "react-icons/md";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { FaHome } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import ManageUsers from "@/pages/Admin/ManageUsers";
+import ManageOrders from "@/pages/Admin/ManageOrders";
+import { LuListOrdered } from "react-icons/lu";
+import { CgProfile } from "react-icons/cg";
+import { ImProfile } from "react-icons/im";
+import { SlLogout } from "react-icons/sl";
 
 const { Content, Sider } = Layout;
 
 const UserDashboardLayout: FC = () => {
-  const [selectedKey, setSelectedKey] = useState("1"); // Track selected menu key
+  const [selectedKey, setSelectedKey] = useState("1");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -30,25 +31,19 @@ const UserDashboardLayout: FC = () => {
   const menuItems = [
     {
       key: "1",
-      icon: <HomeIcon />,
-      label: "Home",
-      component: <Home />,
+      icon: <LuListOrdered size={25} />,
+      label: "Recent Orders",
+      component: <ManageOrders />,
     },
     {
       key: "2",
-      icon: <FaFirstOrder />,
-      label: "Recent Orders",
-      // component: <ManageOrders />,
-    },
-    {
-      key: "3",
-      icon: <RiProfileFill />,
+      icon: <CgProfile size={25} />,
       label: "Profile",
       // component: <MyProfile />,
     },
     {
-      key: "4",
-      icon: <MdUpdate />,
+      key: "3",
+      icon: <ImProfile size={25} />,
       label: "Profile Update",
       // component: <UpdateProfile />,
     },
@@ -66,7 +61,7 @@ const UserDashboardLayout: FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          className="font-orbitron text-[10px]"
+          className="font-orbitron text-[14px]"
           defaultSelectedKeys={["1"]}
           onClick={(e) => setSelectedKey(e.key)}
         >
@@ -76,10 +71,19 @@ const UserDashboardLayout: FC = () => {
             </Menu.Item>
           ))}
           {/* Fix Logout issue by adding onClick event here */}
-          <Menu.Item key="5" icon={<LogOut />} onClick={handleLogOut}>
+          <Menu.Item
+            key="5"
+            icon={<SlLogout size={25} />}
+            onClick={handleLogOut}
+          >
             Logout
           </Menu.Item>
         </Menu>
+        <Link to="/">
+          <button className="flex items-center ml-7 mt-2 gap-2 text-white">
+            <FaHome size={25} /> <span className="text-[14px]">Home</span>
+          </button>
+        </Link>
       </Sider>
       <Layout>
         <Content style={{ margin: "24px 16px 0" }}>
