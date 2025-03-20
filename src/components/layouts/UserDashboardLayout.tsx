@@ -63,7 +63,7 @@ const UserDashboardLayout: FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          className="font-orbitron text-[14px]"
+          className="text-[14px]"
           defaultSelectedKeys={["1"]}
           onClick={(e) => setSelectedKey(e.key)}
         >

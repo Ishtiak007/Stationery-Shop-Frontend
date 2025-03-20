@@ -1,23 +1,22 @@
 import { FC, useState } from "react";
 import { Layout, Menu, theme } from "antd";
 import Footer from "../shared/Footer";
-import {
-  FilePlus,
-  UserRoundPen,
-  SendToBack,
-  FolderKanban,
-  LogOut,
-  HomeIcon,
-} from "lucide-react";
-import Home from "@/pages/Home/Home";
+import { UserRoundPen } from "lucide-react";
 import { useAppDispatch } from "@/redux/hooks";
 import { logOut } from "@/redux/features/auth/authSlice";
 import ManageUsers from "@/pages/Admin/ManageUsers";
+import ManageProducts from "@/pages/Admin/ManageProducts";
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { SlLogout } from "react-icons/sl";
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { SiManageiq } from "react-icons/si";
+import { TbReorder } from "react-icons/tb";
 
 const { Content, Sider } = Layout;
 
 const DashboardLayout: FC = () => {
-  const [selectedKey, setSelectedKey] = useState("1"); // Track selected menu key
+  const [selectedKey, setSelectedKey] = useState("1");
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
@@ -31,33 +30,27 @@ const DashboardLayout: FC = () => {
   const menuItems = [
     {
       key: "1",
-      icon: <HomeIcon />,
-      label: "Home",
-      component: <Home />,
-    },
-    {
-      key: "2",
-      icon: <UserRoundPen />,
+      icon: <UserRoundPen size={25} />,
       label: "Manage Users",
       component: <ManageUsers />,
     },
     {
-      key: "3",
-      icon: <FilePlus />,
+      key: "2",
+      icon: <MdProductionQuantityLimits size={25} />,
       label: "Add Product",
       // component: <AddProducts />,
     },
     {
-      key: "4",
-      icon: <SendToBack />,
+      key: "3",
+      icon: <TbReorder size={25} />,
       label: "Manage Orders",
       // component: <ManageOrders />,
     },
     {
-      key: "5",
-      icon: <FolderKanban />,
+      key: "4",
+      icon: <SiManageiq size={25} />,
       label: "Manage Products",
-      // component: <ManageProducts />,
+      component: <ManageProducts />,
     },
   ];
 
@@ -67,11 +60,13 @@ const DashboardLayout: FC = () => {
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
-        <h2 className="my-5 p-2 text-white font-bold">Admin Dashboard</h2>
+        <h2 className="my-5 p-2 text-white font-orbitron font-bold text-center">
+          Admin Dashboard
+        </h2>
         <Menu
           theme="dark"
           mode="inline"
-          className="font-orbitron text-[10px]"
+          className="font-orbitron text-[14px]"
           selectedKeys={[selectedKey]}
           onClick={(e) => {
             if (e.key === "logout") {
@@ -86,10 +81,15 @@ const DashboardLayout: FC = () => {
               {item.label}
             </Menu.Item>
           ))}
-          <Menu.Item key="logout" icon={<LogOut />} danger>
+          <Menu.Item key="logout" icon={<SlLogout size={25} />}>
             Logout
           </Menu.Item>
         </Menu>
+        <Link to="/">
+          <button className="flex items-center ml-7 mt-2 gap-2 text-white">
+            <FaHome size={25} /> <span className="text-[14px]">Home</span>
+          </button>
+        </Link>
       </Sider>
       <Layout>
         <Content style={{ margin: "24px 16px 0" }}>
