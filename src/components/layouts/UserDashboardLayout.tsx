@@ -11,6 +11,7 @@ import { LuListOrdered } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { ImProfile } from "react-icons/im";
 import { SlLogout } from "react-icons/sl";
+import MyProfile from "@/pages/UserDashboard/MyProfile";
 
 const { Content, Sider } = Layout;
 
@@ -39,7 +40,7 @@ const UserDashboardLayout: FC = () => {
       key: "2",
       icon: <CgProfile size={25} />,
       label: "Profile",
-      // component: <MyProfile />,
+      component: <MyProfile />,
     },
     {
       key: "3",
