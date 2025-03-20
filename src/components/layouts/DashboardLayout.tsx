@@ -67,9 +67,7 @@ const DashboardLayout: FC = () => {
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
-        <h2 className="border rounded shadow-xl mb-4 p-2 text-blue-400 font-orbitron font-bold">
-          Dashboard
-        </h2>
+        <h2 className="my-5 p-2 text-white font-bold">Admin Dashboard</h2>
         <Menu
           theme="dark"
           mode="inline"

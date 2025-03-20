@@ -1,13 +1,20 @@
 import { useGetMeQuery } from "@/redux/features/auth/authApi";
 import { FaUserPen } from "react-icons/fa6";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
 import Loading from "@/components/ui/Loading";
+import UpdateProfile from "./UpdateProfile";
+import { useState } from "react";
 
 const MyProfile = () => {
   const { data: myData, isLoading } = useGetMeQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
+
+  const [showUpdateProfile, setShowUpdateProfile] = useState(false);
+
+  if (showUpdateProfile) {
+    return <UpdateProfile />;
+  }
 
   if (isLoading) {
     return <Loading />;
@@ -18,13 +25,13 @@ const MyProfile = () => {
   return (
     <>
       <div className="">
-        <h2 className="text-xl rounded-md px-1 font-black dark:text-white">
+        <h2 className="text-xl px-1 font-black dark:text-white text-center">
           My Profile
         </h2>
         {/* Profile image section */}
-        <div className=" mt-6 border rounded-lg border-gray-200 p-4 flex flex-col justify-center items-center">
+        <div className=" mt-6 border shadow-md border-gray-200 p-4 flex flex-col justify-center items-center">
           <div className=" flex items-center gap-6">
-            <div className="size-[120px] bg-teal-300 rounded-full flex justify-center items-center">
+            <div className="lg:size-[120px] bg-teal-300 rounded-full flex justify-center items-center">
               <h1 className="text-center">{name}'s Profile image</h1>
             </div>
             <div className="font-medium text-sm">
@@ -46,21 +53,17 @@ const MyProfile = () => {
               </p>
             </div>
           </div>
-          <Link to="/dashboard/update-profile">
-            <div className="my-10">
-              <button
-                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
-  transition-all duration-300 ease-in-out 
-  hover:bg-teal-700 hover:text-white hover:border-none"
-              >
-                Edit Profile
-                <FaUserPen size={25} />
-              </button>
-            </div>
-          </Link>
+          <button
+            onClick={() => setShowUpdateProfile(true)}
+            className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
+        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white hover:border-none my-4"
+          >
+            Edit Profile
+            <FaUserPen size={25} />
+          </button>
         </div>
         {/* Personal Information */}
-        <section className="mt-8 border rounded-md border-gray-200 p-4">
+        <section className="mt-8 border shadow-md border-gray-200 p-4">
           <div className=" flex items-center justify-start">
             <h2 className=" text-lg font-semibold">Personal Information</h2>
           </div>
@@ -101,7 +104,7 @@ const MyProfile = () => {
           </div>
         </section>
         {/* Address */}
-        <section className="mt-8 border rounded-md border-gray-200 p-4">
+        <section className="mt-8 border shadow-md border-gray-200 p-4">
           <div className=" flex items-center justify-start">
             <h2 className=" text-lg font-semibold">{address}</h2>
           </div>

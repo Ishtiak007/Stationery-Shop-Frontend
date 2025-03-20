@@ -12,6 +12,7 @@ import { CgProfile } from "react-icons/cg";
 import { ImProfile } from "react-icons/im";
 import { SlLogout } from "react-icons/sl";
 import MyProfile from "@/pages/UserDashboard/MyProfile";
+import UpdateProfile from "@/pages/UserDashboard/UpdateProfile";
 
 const { Content, Sider } = Layout;
 
@@ -23,6 +24,7 @@ const UserDashboardLayout: FC = () => {
   const handleLogOut = () => {
     dispatch(logOut());
     navigate("/login");
+    d;
   };
 
   const {
@@ -45,8 +47,8 @@ const UserDashboardLayout: FC = () => {
     {
       key: "3",
       icon: <ImProfile size={25} />,
-      label: "Profile Update",
-      // component: <UpdateProfile />,
+      label: "Update Profile",
+      component: <UpdateProfile />,
     },
   ];
 
@@ -56,8 +58,8 @@ const UserDashboardLayout: FC = () => {
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
-        <h2 className="border rounded shadow-xl mb-4 p-2 text-blue-400 font-orbitron font-bold">
-          Dashboard
+        <h2 className="my-5 p-2 text-white font-orbitron font-bold text-center">
+          User Dashboard
         </h2>
         <Menu
           theme="dark"
