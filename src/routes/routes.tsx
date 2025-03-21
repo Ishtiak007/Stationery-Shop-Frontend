@@ -7,6 +7,7 @@ import ProtectedRoute from "./PrivateRoutes";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import AllStationeryProducts from "@/pages/AllProducts/AllStationeryProducts";
 import ProductDetails from "@/pages/AllProducts/ProductDetails";
+import Cart from "@/pages/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role={["admin", "user"]}>
             <ProductDetails></ProductDetails>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <ProtectedRoute role={["admin", "user"]}>
+            <Cart></Cart>
           </ProtectedRoute>
         ),
       },

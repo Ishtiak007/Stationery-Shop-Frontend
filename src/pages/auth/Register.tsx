@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import registerImg from "../../assets/images/login.jpg";
+import registerImg from "../../assets/images/banner1.jpg";
 
 const Register = () => {
   const [signUp] = useRegisterMutation();
@@ -46,7 +46,7 @@ const Register = () => {
             alt="Shoes"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black opacity-40"></div>
+          <div className="absolute inset-0 bg-black opacity-35"></div>
         </div>
 
         {/* Right Side: Register Form */}
@@ -68,7 +68,7 @@ const Register = () => {
               <input
                 placeholder="Name"
                 {...register("name")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -83,7 +83,7 @@ const Register = () => {
                 type="email"
                 placeholder="Email"
                 {...register("email")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -98,7 +98,7 @@ const Register = () => {
                 type="password"
                 placeholder="Password"
                 {...register("password")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -106,7 +106,8 @@ const Register = () => {
             <div className="flex justify-center mt-4">
               <Button
                 type="submit"
-                className="bg-primary-bg text-black py-2 px-6 rounded-lg w-full hover:bg-secondary transition"
+                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
+        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white mt-2"
                 variant={"outline"}
                 disabled={FormData === null}
               >
@@ -115,7 +116,7 @@ const Register = () => {
             </div>
           </form>
 
-          <div className="text-[10px] font-bold text-red-400">
+          <div className="text-[15px] font-bold text-red-600">
             Already have an account?{" "}
             <a href="/login" className="text-blue-600 hover:underline">
               Login here
