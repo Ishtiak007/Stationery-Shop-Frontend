@@ -12,6 +12,7 @@ import { SlLogout } from "react-icons/sl";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { SiManageiq } from "react-icons/si";
 import { TbReorder } from "react-icons/tb";
+import AddProducts from "@/pages/Admin/AddProducts";
 
 const { Content, Sider } = Layout;
 
@@ -38,7 +39,7 @@ const DashboardLayout: FC = () => {
       key: "2",
       icon: <MdProductionQuantityLimits size={25} />,
       label: "Add Product",
-      // component: <AddProducts />,
+      component: <AddProducts />,
     },
     {
       key: "3",

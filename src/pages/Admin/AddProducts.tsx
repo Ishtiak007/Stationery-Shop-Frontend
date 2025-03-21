@@ -1,13 +1,8 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { toast } from "sonner";
-import { Store, Check } from "lucide-react";
-import { useAddProductMutation } from "@/redux/features/products/productsApi";
-import { TProducts } from "@/types/productTypes";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -16,30 +11,34 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
+import { Store, Check } from "lucide-react";
+import { useAddProductMutation } from "@/redux/features/products/productsApi";
+import { TProducts } from "@/types/productTypes";
 
 const defaultValues = {
-  name: "Elegant Leather Notebook",
-  author: "Jane Smith",
-  description:
-    "A premium leather-bound notebook perfect for journaling and planning.",
-  category: "Notebooks",
-  price: 20,
-  stockQuantity: 150,
-  brand: "EliteNotes",
-  color: "Brown",
-  size: "A5",
-  material: "Leather & Paper",
-  sku: "NB102",
-  rating: 4.8,
-  isFeatured: false,
-  tags: ["journaling", "office", "premium"],
+  name: "Colorful Sticky Notes",
+  author: "John Doe",
+  description: "A set of colorful sticky notes for office and school use.",
+  category: "Sticky Notes",
+  price: 5,
+  stockQuantity: 250,
+  brand: "NoteMaster",
+  color: "Multicolor",
+  size: "3x3 inches",
+  material: "Paper",
+  sku: "SN006",
+  rating: 4,
+  isFeatured: true,
+  tags: ["office", "stationery", "notes"],
   discount: {
-    percentage: "10",
-    validUntil: "2026-06-30T23:59:59.000Z",
+    percentage: "15",
+    validUntil: "2025-12-31T23:59:59.000Z",
   },
-  status: "in stock",
+  status: "available",
   productImg:
-    "https://res.cloudinary.com/dzhou2pgk/image/upload/v1740090362/notebook.jpg",
+    "https://res.cloudinary.com/dzhou2pgk/image/upload/v1740090362/shoes.jpg",
 };
 
 const AddProducts = () => {
@@ -82,6 +81,11 @@ const AddProducts = () => {
           : undefined,
     };
     const stringifyData = JSON.stringify(productData);
+    // const formData = new FormData();
+    // formData.append("data", JSON.stringify(productData));
+    // if (data.productImg && data.productImg[0]) {
+    //   formData.append("file", data.productImg[0]);
+    // }
 
     try {
       const res = await addProduct(stringifyData);
