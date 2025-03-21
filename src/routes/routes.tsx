@@ -5,6 +5,7 @@ import Home from "@/pages/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./PrivateRoutes";
 import Dashboard from "@/components/Dashboard/Dashboard";
+import AllStationeryProducts from "@/pages/AllProducts/AllStationeryProducts";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/all-product",
+        element: <AllStationeryProducts />,
       },
     ],
   },
