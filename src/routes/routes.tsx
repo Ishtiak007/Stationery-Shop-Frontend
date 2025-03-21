@@ -6,6 +6,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./PrivateRoutes";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import AllStationeryProducts from "@/pages/AllProducts/AllStationeryProducts";
+import ProductDetails from "@/pages/AllProducts/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/all-product",
         element: <AllStationeryProducts />,
+      },
+      {
+        path: "/product/:id",
+        element: (
+          <ProtectedRoute role={["admin", "user"]}>
+            <ProductDetails></ProductDetails>
+          </ProtectedRoute>
+        ),
       },
     ],
   },

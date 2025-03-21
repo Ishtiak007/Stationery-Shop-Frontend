@@ -3,6 +3,7 @@ import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
 
 import { TProducts } from "@/types/productTypes";
 import { useParams } from "react-router-dom";
+import ProductDetailsCard from "./ProductDetailsCard";
 
 const ProductDetails = () => {
   const { data: productData } = useGetAllProductsQuery(undefined);
