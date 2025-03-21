@@ -5,14 +5,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Card = React.memo(({ card }: { card: any }) => (
-  <div className="rounded-lg bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full">
+  <div className="rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out">
     <Img
       src={card.src}
       alt={card.title}
       className="object-cover w-full h-full"
     />
     <div className="absolute bottom-0 w-full bg-black/50 py-4 px-4">
-      <div className="text-xl md:text-2xl font-medium text-white">
+      <div className="text-base md:text-lg font-medium text-white">
         {card.title}
       </div>
     </div>
