@@ -9,7 +9,7 @@ export const Card = React.memo(({ card }: { card: any }) => (
     <Img
       src={card.src}
       alt={card.title}
-      className="object-cover w-full h-full"
+      className="object-cover w-full h-full transform transition-transform duration-300 hover:translate-y-[-5px]"
     />
     <div className="absolute bottom-0 w-full bg-black/50 py-4 px-4">
       <div className="text-base md:text-lg font-medium text-white">

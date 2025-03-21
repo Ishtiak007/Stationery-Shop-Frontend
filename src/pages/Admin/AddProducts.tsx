@@ -81,11 +81,6 @@ const AddProducts = () => {
           : undefined,
     };
     const stringifyData = JSON.stringify(productData);
-    // const formData = new FormData();
-    // formData.append("data", JSON.stringify(productData));
-    // if (data.productImg && data.productImg[0]) {
-    //   formData.append("file", data.productImg[0]);
-    // }
 
     try {
       const res = await addProduct(stringifyData);

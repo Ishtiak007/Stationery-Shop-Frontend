@@ -5,7 +5,7 @@ import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineDateRange } from "react-icons/md";
 const Blog = () => {
   return (
-    <div className="my-36">
+    <div className="my-24">
       <div className="my-8">
         <h1 className="text-center font-medium lg:text-3xl text-lg">
           Our Blogs
