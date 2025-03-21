@@ -14,7 +14,7 @@ const ProductDetails = () => {
   );
 
   return (
-    <div className="container mx-auto mt-7 overflow-hidden mb-8">
+    <div className="container mx-auto overflow-hidden mb-8 flex justify-center items-center">
       {product?.map((details) => {
         return <ProductDetailsCard product={details} key={details._id} />;
       })}

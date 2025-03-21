@@ -1,4 +1,3 @@
-import { ShoppingCart, Zap } from "lucide-react";
 import { toast } from "sonner";
 import moment from "moment";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -7,7 +6,6 @@ import { verifyToken } from "@/utils/verifyToken";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { TProducts } from "@/types/productTypes";
-import { Button } from "@/components/ui/button";
 interface DecodedToken {
   role: string;
   email?: string;
@@ -87,38 +85,46 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
   };
 
   return (
-    <div className="w-[50rem] p-4 font-orbitron bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-      <img src={productImg} alt={name} className="w-full h-64 object-cover" />
+    <div className="lg:w-[40rem] bg-teal-200 bg-opacity-10 p-4 rounded-xl shadow-md overflow-hidden border border-gray-100 mt-20">
+      <img
+        src={productImg}
+        alt={name}
+        className="w-full h-48 object-cover rounded-md"
+      />
       <div className="p-4 space-y-2">
-        <h3 className="text-xl font-bold text-gray-800">{name}</h3>
-        <p className="text-gray-600 font-serif text-sm">{description}</p>
-        <p className="text-lg font-semibold text-primary">Tk {price}</p>
-        <p className="text-sm text-red-500">{stockQuantity} left in stock</p>
+        <div className="flex items-center justify-between">
+          <h3 className="text-2xl font-bold text-gray-800">{name}</h3>
+          <p className="text-sm outline outline-[1px] outline-gray-300 rounded-2xl p-[2px]">
+            <span className="text-red-500">{stockQuantity}</span> left in stock
+          </p>
+        </div>
+        <p className="text-gray-600 text-base">{description}</p>
+        <p className="text-lg font-semibold"> {price} Tk</p>
+
         {discount && (
-          <p className="text-sm font-serif text-green-600">
+          <p className="text-base text-green-800">
             {discount.percentage}% off - valid until{" "}
             {moment(discount.validUntil).format("MMMM Do YYYY")}
           </p>
         )}
-        <p className="text-sm font-bold text-gray-500">Category: {category}</p>
-        <p className="text-sm font-mono text-blue-500">
-          Brand: {brand || "N/A"}
-        </p>
-        <div className="flex gap-2 mt-4">
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 flex items-center justify-center gap-2 bg-secondary text-white py-2 rounded-md shadow hover:scale-105 transition-transform"
-          >
-            <ShoppingCart size={18} />{" "}
-            <Button variant={"outline"} className="text-black">
+        <p className="text-sm font-bold text-black">Category: {category}</p>
+        <p className="text-sm text-blue-800">Brand: {brand || "N/A"}</p>
+        <div className="flex gap-2 mt-4 items-center justify-center">
+          <button onClick={handleAddToCart}>
+            <button
+              className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
+        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
+            >
               Add to Cart
-            </Button>
+            </button>
           </button>
           <button
             onClick={handleBuyNow}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#FA641C] text-white py-2 rounded-md shadow hover:scale-105 transition-transform"
+            className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
+        transition-all duration-300 ease-in-out bg-teal-700 hover:bg-white text-white hover:text-black  my-4"
           >
-            <Zap size={18} /> Buy Now
+            {" "}
+            Buy Now
           </button>
         </div>
       </div>
