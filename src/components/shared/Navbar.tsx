@@ -78,8 +78,6 @@ const Navbar = () => {
               <Link to={"/about"}>About</Link>
             </button>
           </div>
-
-          {/* <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600" /> */}
         </div>
 
         {/* Icons and Menu */}
@@ -102,7 +100,7 @@ const Navbar = () => {
                           <FaRegUser size={28} />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p className="font-orbitron font-bold uppercase text-white">
+                          <p className=" font-bold uppercase text-white">
                             {initials}
                           </p>
                         </TooltipContent>
@@ -111,7 +109,7 @@ const Navbar = () => {
                   </Button>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className="w-56 font-orbitron text-white">
+                <DropdownMenuContent className="w-56 text-orange-500">
                   {/* <DropdownMenuLabel className="mt-2">Panel Position</DropdownMenuLabel> */}
                   <DropdownMenuSeparator />
                   <DropdownMenuRadioGroup
@@ -122,7 +120,7 @@ const Navbar = () => {
                       {/* dashboard */}
                       <Link to={dashboardLink}>
                         <Button variant={"outline"}>
-                          <p className="font-bold font-orbitron">Dashboard</p>
+                          <p className="font-bold ">Dashboard</p>
                         </Button>
                       </Link>
                     </DropdownMenuRadioItem>
@@ -130,7 +128,7 @@ const Navbar = () => {
                     <DropdownMenuRadioItem value="right">
                       {/* log out */}
                       <Button onClick={handleLogOut} variant={"outline"}>
-                        <p className="font-bold font-orbitron">Logout</p>
+                        <p className="font-bold ">Logout</p>
                       </Button>
                     </DropdownMenuRadioItem>
                   </DropdownMenuRadioGroup>
