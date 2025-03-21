@@ -29,7 +29,7 @@ const CustomerFavorites = () => {
             className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
         transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
           >
-            Show More
+            Show More Categories
           </button>
         </Link>
       </div>
