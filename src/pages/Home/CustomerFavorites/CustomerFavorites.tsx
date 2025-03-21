@@ -1,6 +1,7 @@
 "use strict";
 import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
 import { CustomerFavoritesCard } from "./CustomerFavoritesCard";
+import { Link } from "react-router-dom";
 
 const CustomerFavorites = () => {
   const { data: productsData } = useGetAllProductsQuery(undefined);
@@ -23,12 +24,14 @@ const CustomerFavorites = () => {
       </h2>
       <CustomerFavoritesCard cards={featuredCards} />
       <div className="flex justify-center items-center my-10">
-        <button
-          className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
+        <Link to="/all-product">
+          <button
+            className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
         transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
-        >
-          Show More
-        </button>
+          >
+            Show More
+          </button>
+        </Link>
       </div>
     </div>
   );
