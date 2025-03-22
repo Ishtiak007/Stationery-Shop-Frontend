@@ -57,7 +57,14 @@ const ManageOrders = () => {
     return <Loading />;
   }
   const myData = allOrders?.data || [];
-  console.log(allOrders, "mydataaa");
+
+  const statusOptions = [
+    "Pending",
+    "Paid",
+    "Shipped",
+    "Completed",
+    "Cancelled",
+  ];
   return (
     <>
       <div>
@@ -126,18 +133,22 @@ const ManageOrders = () => {
                               <ChevronDown className="ml-1 h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent className="bg-primary-bg border-neutral-300">
-                            <DropdownMenuItem
-                              onClick={() =>
-                                handleStatusChange(
-                                  order._id,
-                                  order.status,
-                                  "Shipped"
-                                )
-                              }
-                            >
-                              Shipped
-                            </DropdownMenuItem>
+                          <DropdownMenuContent className=" border-neutral-300">
+                            {/* Iterate over the statusOptions and render each as a DropdownMenuItem */}
+                            {statusOptions.map((status) => (
+                              <DropdownMenuItem
+                                key={status}
+                                onClick={() =>
+                                  handleStatusChange(
+                                    order._id,
+                                    order.status,
+                                    status
+                                  )
+                                }
+                              >
+                                {status}
+                              </DropdownMenuItem>
+                            ))}
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
