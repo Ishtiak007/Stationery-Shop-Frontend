@@ -40,7 +40,7 @@ const ManageOrders = () => {
   const handleStatusChange = async (
     orderId: string,
     currentStatus: string,
-    newStatus: "Shipped"
+    newStatus: string
   ) => {
     if (currentStatus === newStatus) return;
 
