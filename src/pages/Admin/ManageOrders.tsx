@@ -137,6 +137,7 @@ const ManageOrders = () => {
                             {/* Iterate over the statusOptions and render each as a DropdownMenuItem */}
                             {statusOptions.map((status) => (
                               <DropdownMenuItem
+                                className="cursor-pointer font-medium text-base bg-white border"
                                 key={status}
                                 onClick={() =>
                                   handleStatusChange(
