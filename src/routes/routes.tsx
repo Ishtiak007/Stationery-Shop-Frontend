@@ -8,6 +8,7 @@ import Dashboard from "@/components/Dashboard/Dashboard";
 import AllStationeryProducts from "@/pages/AllProducts/AllStationeryProducts";
 import ProductDetails from "@/pages/AllProducts/ProductDetails";
 import Cart from "@/pages/Cart/Cart";
+import OrderVerification from "@/pages/Cart/VerifyOrder";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             <Cart></Cart>
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/orders/verify",
+        element: <OrderVerification></OrderVerification>,
       },
     ],
   },
