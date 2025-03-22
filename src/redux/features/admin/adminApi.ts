@@ -18,8 +18,19 @@ const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["orders"],
     }),
+    deleteOrder: builder.mutation<void, string>({
+      query: (orderId) => ({
+        url: `/orders/${orderId}`, // Specify the path to your API endpoint
+        method: "DELETE", // Use the DELETE method
+      }),
+      // Invalidate the 'orders' cache after deletion
+      invalidatesTags: ["orders"],
+    }),
   }),
 });
 
-export const { useUserStatusUpdateMutation, useUpdateOrderStatusMutation } =
-  adminApi;
+export const {
+  useUserStatusUpdateMutation,
+  useUpdateOrderStatusMutation,
+  useDeleteOrderMutation,
+} = adminApi;
