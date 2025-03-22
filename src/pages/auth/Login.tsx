@@ -112,6 +112,15 @@ const Login = () => {
               Register first
             </a>
           </div>
+
+          <div>
+            <p>
+              <strong>Admin Email: </strong> ishtiak.sparrow98@gmail.com
+            </p>
+            <p>
+              <strong>Admin Pass: </strong> ishtiak123
+            </p>
+          </div>
         </div>
       </div>
     </div>
