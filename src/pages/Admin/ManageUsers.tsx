@@ -13,7 +13,10 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useAllUsersQuery } from "@/redux/features/auth/authApi";
+import {
+  useAllUsersQuery,
+  useDeleteUserMutation,
+} from "@/redux/features/auth/authApi";
 import { TUser } from "@/types/userTypes";
 import {
   Table,
@@ -28,6 +31,7 @@ import { MdDeleteOutline } from "react-icons/md";
 
 const ManageUsers = () => {
   const { data: userData, isLoading, isFetching } = useAllUsersQuery(undefined);
+  const [deleteUser] = useDeleteUserMutation();
   const usersInfo = userData?.data || [];
 
   const [updateStatus] = useUserStatusUpdateMutation();
@@ -54,6 +58,17 @@ const ManageUsers = () => {
   if (isFetching && isLoading) {
     return <Loading />;
   }
+
+  const handleDelete = async (userId: string) => {
+    if (confirm("Are you sure you want to delete this user?")) {
+      try {
+        await deleteUser(userId);
+        toast.success("User deleted successfully!");
+      } catch (error) {
+        toast.error("Failed to delete user");
+      }
+    }
+  };
 
   return (
     <>
@@ -134,7 +149,10 @@ const ManageUsers = () => {
                     </TableCell>
                     <TableCell>
                       <span className="flex items-center gap-1 text-red-600 cursor-pointer">
-                        <MdDeleteOutline size={18} />
+                        <MdDeleteOutline
+                          onClick={() => handleDelete(user._id)}
+                          size={18}
+                        />
                         Ban
                       </span>
                     </TableCell>
