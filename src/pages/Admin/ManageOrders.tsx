@@ -16,12 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useUpdateOrderStatusMutation } from "@/redux/features/admin/adminApi";
+import {
+  useDeleteOrderMutation,
+  useUpdateOrderStatusMutation,
+} from "@/redux/features/admin/adminApi";
 import { useState } from "react";
 import { toast } from "sonner";
 import clsx from "clsx";
 import Loading from "@/components/ui/Loading";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MdOutlineDelete } from "react-icons/md";
 
 const ManageOrders = () => {
   const [loadingOrderId, setLoadingOrderId] = useState<string | null>(null);
@@ -31,6 +35,7 @@ const ManageOrders = () => {
     isFetching,
     isLoading,
   } = useGetOrdersQuery(undefined);
+  const [deleteOrder] = useDeleteOrderMutation(undefined);
 
   const handleStatusChange = async (
     orderId: string,
@@ -65,6 +70,16 @@ const ManageOrders = () => {
     "Completed",
     "Cancelled",
   ];
+
+  const handleDeleteOrder = async (orderId: string) => {
+    try {
+      // Trigger delete order mutation
+      await deleteOrder(orderId);
+      toast.success("Order deleted successfully!");
+    } catch (err) {
+      toast.error("Failed to delete the order");
+    }
+  };
   return (
     <>
       <div>
@@ -94,6 +109,7 @@ const ManageOrders = () => {
                   <TableHead>Order Code</TableHead>
                   <TableHead>Payment Method</TableHead>
                   <TableHead>Payment Status</TableHead>
+                  <TableHead>Delete Order</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -152,6 +168,14 @@ const ManageOrders = () => {
                             ))}
                           </DropdownMenuContent>
                         </DropdownMenu>
+                      </TableCell>
+                      <TableCell>
+                        <button
+                          onClick={() => handleDeleteOrder(order._id)}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          <MdOutlineDelete size={20} />
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}
