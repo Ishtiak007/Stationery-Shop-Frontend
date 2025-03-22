@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { Layout, Menu, theme } from "antd";
-import Footer from "../shared/Footer";
 import { UserRoundPen } from "lucide-react";
 import { useAppDispatch } from "@/redux/hooks";
 import { logOut } from "@/redux/features/auth/authSlice";
@@ -14,6 +13,7 @@ import { SiManageiq } from "react-icons/si";
 import { TbReorder } from "react-icons/tb";
 import AddProducts from "@/pages/Admin/AddProducts";
 import ManageOrders from "@/pages/Admin/ManageOrders";
+import DashboardFooter from "../shared/DashboardFooter";
 
 const { Content, Sider } = Layout;
 
@@ -107,7 +107,7 @@ const DashboardLayout: FC = () => {
             {selectedComponent}
           </div>
         </Content>
-        <Footer />
+        <DashboardFooter />
       </Layout>
     </Layout>
   );

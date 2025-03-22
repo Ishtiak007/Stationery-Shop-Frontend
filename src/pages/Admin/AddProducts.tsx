@@ -13,7 +13,6 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Check } from "lucide-react";
 import { useAddProductMutation } from "@/redux/features/products/productsApi";
 import { TProducts } from "@/types/productTypes";
 
