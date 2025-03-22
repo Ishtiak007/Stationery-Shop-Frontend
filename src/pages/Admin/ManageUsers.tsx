@@ -104,8 +104,8 @@ const ManageUsers = () => {
                     <TableCell
                       className={clsx(
                         "flex items-center gap-2",
-                        user.status === "active" && "text-green-500",
-                        user.status === "blocked" && "text-secondary"
+                        user.status === "active" && "text-green-700",
+                        user.status === "blocked" && "text-blue-700"
                       )}
                     >
                       <DropdownMenu>

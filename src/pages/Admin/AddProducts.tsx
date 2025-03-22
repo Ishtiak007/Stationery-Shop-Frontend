@@ -13,39 +13,13 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Store, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useAddProductMutation } from "@/redux/features/products/productsApi";
 import { TProducts } from "@/types/productTypes";
 
-const defaultValues = {
-  name: "Colorful Sticky Notes",
-  author: "John Doe",
-  description: "A set of colorful sticky notes for office and school use.",
-  category: "Sticky Notes",
-  price: 5,
-  stockQuantity: 250,
-  brand: "NoteMaster",
-  color: "Multicolor",
-  size: "3x3 inches",
-  material: "Paper",
-  sku: "SN006",
-  rating: 4,
-  isFeatured: true,
-  tags: ["office", "stationery", "notes"],
-  discount: {
-    percentage: "15",
-    validUntil: "2025-12-31T23:59:59.000Z",
-  },
-  status: "available",
-  productImg:
-    "https://res.cloudinary.com/dzhou2pgk/image/upload/v1740090362/shoes.jpg",
-};
-
 const AddProducts = () => {
   const [addProduct] = useAddProductMutation();
-  const { handleSubmit, register } = useForm({
-    defaultValues,
-  });
+  const { handleSubmit, register } = useForm({});
 
   const onSubmit: SubmitHandler<FieldValues> = async (
     data: Partial<TProducts>
@@ -96,8 +70,8 @@ const AddProducts = () => {
   return (
     <Card className="max-w-3xl mx-auto mt-10 p-6 shadow-lg rounded-lg">
       <CardHeader>
-        <CardTitle className="flex font-orbitron items-center gap-2 text-xl font-semibold">
-          <Store /> Add New Product
+        <CardTitle className="flex font-orbitron items-center gap-2 text-xl font-semibold mx-auto">
+          Add Product
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -121,14 +95,7 @@ const AddProducts = () => {
                 required
               />
             </div>
-            <div className="md:col-span-2">
-              <Label>Description</Label>
-              <Textarea
-                {...register("description")}
-                placeholder="Enter product description"
-                required
-              />
-            </div>
+
             <div>
               <Label>Price</Label>
               <Input
@@ -219,12 +186,12 @@ const AddProducts = () => {
                 required
               />
             </div>
-            <div>
+            <div className="border rounded-md p-2">
               <Label>Category</Label>
               <select
                 {...register("category")}
                 defaultValue="Pencils"
-                className="form-select"
+                className="form-select cursor-pointer"
               >
                 <option value="Notebooks">Notebooks</option>
                 <option value="Pens">Pens</option>
@@ -252,17 +219,30 @@ const AddProducts = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div>
+            <div className="md:col-span-2">
               <Label>Product Image</Label>
               <Input type="file" {...register("productImg")} />
+            </div>
+
+            <div className="md:col-span-2">
+              <Label>Description</Label>
+              <Textarea
+                {...register("description")}
+                placeholder="Enter product description"
+                required
+              />
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox id="isFeatured" {...register("isFeatured")} />
               <Label htmlFor="isFeatured">Featured Product?</Label>
             </div>
           </div>
-          <Button type="submit" className="w-full flex items-center gap-2">
-            <Check /> Submit
+          <Button
+            type="submit"
+            className="w-full hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-md 
+        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
+          >
+            Add Product
           </Button>
         </form>
       </CardContent>

@@ -9,7 +9,6 @@ const CustomerFavorites = () => {
   const isFeatured = productsData?.data?.filter(
     (itm) => itm.isFeatured === true
   );
-  console.log(isFeatured, "featured");
   const featuredCards =
     isFeatured?.map((item) => ({
       title: item.name,
