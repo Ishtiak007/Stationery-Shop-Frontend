@@ -24,6 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Loading from "@/components/ui/Loading";
+import { MdDeleteOutline } from "react-icons/md";
 
 const ManageUsers = () => {
   const { data: userData, isLoading, isFetching } = useAllUsersQuery(undefined);
@@ -70,6 +71,7 @@ const ManageUsers = () => {
                 <TableHead>Phone</TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Ban User</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -129,6 +131,12 @@ const ManageUsers = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
+                    </TableCell>
+                    <TableCell>
+                      <span className="flex items-center gap-1 text-red-600 cursor-pointer">
+                        <MdDeleteOutline size={18} />
+                        Ban
+                      </span>
                     </TableCell>
                   </TableRow>
                 ))}
