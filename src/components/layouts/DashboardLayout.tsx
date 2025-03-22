@@ -13,6 +13,7 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import { SiManageiq } from "react-icons/si";
 import { TbReorder } from "react-icons/tb";
 import AddProducts from "@/pages/Admin/AddProducts";
+import ManageOrders from "@/pages/Admin/ManageOrders";
 
 const { Content, Sider } = Layout;
 
@@ -45,7 +46,7 @@ const DashboardLayout: FC = () => {
       key: "3",
       icon: <TbReorder size={25} />,
       label: "Manage Orders",
-      // component: <ManageOrders />,
+      component: <ManageOrders />,
     },
     {
       key: "4",
