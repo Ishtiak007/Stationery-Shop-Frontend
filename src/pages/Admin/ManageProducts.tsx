@@ -11,6 +11,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import Loading from "@/components/ui/Loading";
 import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
+import { FaEdit } from "react-icons/fa";
 
 const ManageProducts = () => {
   const {
@@ -42,23 +43,24 @@ const ManageProducts = () => {
             )}
             <Table>
               <TableHeader>
-                <TableRow className="border-neutral-400 text-primary-text font-semibold text-xl">
+                <TableRow className="border-neutral-400 text-primary-text font-semibold text-lg">
                   <TableHead>Product Name</TableHead>
                   <TableHead>Category</TableHead>
                   <TableHead>Price</TableHead>
                   <TableHead>Stock</TableHead>
+                  <TableHead>Update</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {allProducts?.data?.map((product) => (
-                  <TableRow
-                    key={product._id}
-                    className="border-neutral-400 text-primary-text"
-                  >
+                  <TableRow key={product._id} className="border-neutral-400">
                     <TableCell>{product.name}</TableCell>
                     <TableCell>{product.category}</TableCell>
                     <TableCell>${product.price}</TableCell>
                     <TableCell>{product.description}</TableCell>
+                    <TableCell>
+                      <FaEdit size={18} className="cursor-pointer" />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
