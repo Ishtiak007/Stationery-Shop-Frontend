@@ -86,17 +86,17 @@ const AddProducts = () => {
               />
             </div>
             <div>
-              <Label>Brand</Label>
+              <Label>Brand Name</Label>
               <Input
                 type="text"
                 {...register("brand")}
-                placeholder="Enter brand"
+                placeholder="Enter product brand"
                 required
               />
             </div>
 
             <div>
-              <Label>Price</Label>
+              <Label>Price Range</Label>
               <Input
                 type="number"
                 {...register("price")}
@@ -141,11 +141,11 @@ const AddProducts = () => {
               />
             </div>
             <div>
-              <Label>SKU</Label>
+              <Label>Stock Keeping Unit</Label>
               <Input
                 type="text"
                 {...register("sku")}
-                placeholder="Enter SKU"
+                placeholder="Enter Stock Keeping Unit"
                 required
               />
             </div>
@@ -169,15 +169,15 @@ const AddProducts = () => {
               />
             </div>
             <div>
-              <Label>Tags (comma separated)</Label>
+              <Label>Tags (use commas to separate)</Label>
               <Input
                 type="text"
                 {...register("tags")}
-                placeholder="Enter product tags"
+                placeholder="Enter product tags -use commas to separate"
               />
             </div>
             <div>
-              <Label>Author</Label>
+              <Label>Author Name</Label>
               <Input
                 type="text"
                 {...register("author")}
@@ -186,7 +186,7 @@ const AddProducts = () => {
               />
             </div>
             <div className="border rounded-md p-2">
-              <Label>Category</Label>
+              <Label>Choose a Category</Label>
               <select
                 {...register("category")}
                 defaultValue="Pencils"
@@ -206,15 +206,21 @@ const AddProducts = () => {
               </select>
             </div>
             <div>
-              <Label>Status</Label>
+              <Label>Product Status</Label>
               <Select {...register("status")}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
-                <SelectContent className="text-purple-600 bg-black">
-                  <SelectItem value="available">Available</SelectItem>
-                  <SelectItem value="out_of_stock">Out of Stock</SelectItem>
-                  <SelectItem value="discontinued">Discontinued</SelectItem>
+                <SelectContent className="text-white cursor-pointer bg-black">
+                  <SelectItem className="cursor-pointer" value="available">
+                    Available
+                  </SelectItem>
+                  <SelectItem className="cursor-pointer" value="out_of_stock">
+                    Out of Stock
+                  </SelectItem>
+                  <SelectItem className="cursor-pointer" value="discontinued">
+                    Discontinued
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -232,8 +238,8 @@ const AddProducts = () => {
               />
             </div>
             <div className="flex items-center space-x-2">
+              <Label htmlFor="isFeatured">Is this featured product?</Label>
               <Checkbox id="isFeatured" {...register("isFeatured")} />
-              <Label htmlFor="isFeatured">Featured Product?</Label>
             </div>
           </div>
           <Button
@@ -241,7 +247,7 @@ const AddProducts = () => {
             className="w-full hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-md 
         transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
           >
-            Add Product
+            Add This Product
           </Button>
         </form>
       </CardContent>
