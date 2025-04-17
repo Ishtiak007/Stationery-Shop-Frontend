@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,38 +17,79 @@ import { Store, Check } from "lucide-react";
 import { TProducts } from "@/types/productTypes";
 import { useAddProductsMutation } from "@/redux/features/products/productsApi";
 
+const defaultValues = {
+  name: "Smart Pen Pro",
+  author: "John Doe",
+  description:
+    "An advanced pen with built-in smart features for digital note-taking.",
+  category: "Pens",
+  price: 39,
+  stockQuantity: 200,
+  brand: "TechPen",
+  color: "Silver",
+  size: "Medium",
+  material: "Aluminum, Ink",
+  sku: "SP0012",
+  rating: 4,
+  isFeatured: false,
+  tags: ["office", "technology", "pen", "digital"],
+  discount: {
+    percentage: "15",
+    validUntil: "2025-12-31T23:59:59.000Z",
+  },
+  status: "available",
+  productImg:
+    "https://res.cloudinary.com/damhxwmye/image/upload/v1744885323/%24Premium%20Notebook%20two.jpg",
+};
+
 const AddProducts = () => {
   const [addProduct] = useAddProductsMutation();
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register } = useForm({ defaultValues });
 
-  const onSubmit = async (data: Partial<TProducts>) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (
+    data: Partial<TProducts>
+  ) => {
     const toastId = toast.loading("Loading...");
+    const productData = {
+      name: data.name,
+      author: data.author,
+      description: data.description,
+      category: data.category,
+      price: data.price,
+      stockQuantity: data.stockQuantity,
+      brand: data.brand,
+      color: data.color,
+      size: data.size,
+      material: data.material,
+      sku: data.sku,
+      rating: data.rating,
+      isFeatured: data.isFeatured,
+      tags: data.tags,
+      status: data.status,
+      discount: data.discount?.percentage
+        ? {
+            percentage: data.discount.percentage.toString(),
+            validUntil: data.discount.validUntil
+              ? new Date(data.discount.validUntil).toISOString()
+              : new Date().toISOString(),
+          }
+        : undefined,
+    };
 
-    // Create formData object
+    const stringifyData = JSON.stringify(productData);
     const formData = new FormData();
-
-    // Append regular fields
-    Object.keys(data).forEach((key) => {
-      if (data[key] !== undefined && key !== "productImg") {
-        formData.append(key, data[key]);
-      }
-    });
-
-    // Append file (image)
+    formData.append("data", stringifyData);
     if (data.productImg && data.productImg[0]) {
       formData.append("file", data.productImg[0]);
+    } else {
+      console.log("No image file selected.");
     }
-
     try {
-      // Call the API to add the product
       const res = await addProduct(formData);
-
       if (res.data) {
-        toast.success("Product added successfully!", { id: toastId });
-      } else {
-        toast.error("Failed to add product", { id: toastId });
+        toast.success(res.data.message, { id: toastId });
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong", { id: toastId });
     }
   };
@@ -181,7 +222,11 @@ const AddProducts = () => {
             </div>
             <div>
               <Label>Category</Label>
-              <select {...register("category")} className="form-select">
+              <select
+                {...register("category")}
+                defaultValue="Pencils"
+                className="form-select"
+              >
                 <option value="Notebooks">Notebooks</option>
                 <option value="Pens">Pens</option>
                 <option value="Pencils">Pencils</option>
