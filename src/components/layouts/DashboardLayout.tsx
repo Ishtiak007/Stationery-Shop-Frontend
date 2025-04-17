@@ -61,14 +61,17 @@ const DashboardLayout: FC = () => {
 
   return (
     <Layout>
-      <Sider breakpoint="lg" collapsedWidth="0">
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        className="bg-[#115E59] h-screen"
+      >
         <h2 className="my-5 p-2 text-white font-orbitron font-bold text-center">
           Admin Dashboard
         </h2>
-        <Menu
-          theme="dark"
+        {/* <Menu
           mode="inline"
-          className="font-orbitron text-[14px]"
+          className="font-orbitron text-[14px] bg-[#115E59] "
           selectedKeys={[selectedKey]}
           onClick={(e) => {
             if (e.key === "logout") {
@@ -79,14 +82,59 @@ const DashboardLayout: FC = () => {
           }}
         >
           {menuItems.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon}>
+            <Menu.Item
+              key={item.key}
+              icon={item.icon}
+              style={{ color: "white" }}
+            >
               {item.label}
             </Menu.Item>
           ))}
-          <Menu.Item key="logout" icon={<SlLogout size={25} />}>
+          <Menu.Item
+            key="logout"
+            icon={<SlLogout size={25} style={{ color: "white" }} />}
+          >
+            Logout
+          </Menu.Item>
+        </Menu> */}
+        <Menu
+          mode="inline"
+          className="font-orbitron text-[14px] bg-[#115E59]"
+          selectedKeys={[selectedKey]}
+          onClick={(e) => {
+            if (e.key === "logout") {
+              handleLogOut();
+            } else {
+              setSelectedKey(e.key);
+            }
+          }}
+        >
+          {menuItems.map((item) => (
+            <Menu.Item
+              key={item.key}
+              icon={item.icon}
+              style={{
+                color: "white",
+                backgroundColor:
+                  selectedKey === item.key ? "#077A7D" : "transparent",
+              }}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+          <Menu.Item
+            key="logout"
+            icon={<SlLogout size={25} />}
+            style={{
+              color: "white",
+              backgroundColor:
+                selectedKey === "logout" ? "#077A7D" : "transparent",
+            }}
+          >
             Logout
           </Menu.Item>
         </Menu>
+
         <Link to="/">
           <button className="flex items-center ml-7 mt-2 gap-2 text-white">
             <FaHome size={25} /> <span className="text-[14px]">Home</span>
