@@ -37,6 +37,10 @@ const ManageUsers = () => {
 
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
 
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<string | null>(null);
+
   // Handle updating the user status (active / blocked)
   const handleStatusChange = async (
     userId: string,
@@ -61,14 +65,29 @@ const ManageUsers = () => {
   };
 
   // Handle deleting the user
-  const handleDeleteUser = async (userId: string) => {
-    try {
-      // Call the delete mutation
-      await deleteUser(userId).unwrap();
-      toast.success("User deleted successfully!");
-    } catch (error: any) {
-      toast.error(error?.message || "Error deleting user");
+  const handleDeleteUser = async () => {
+    if (userToDelete) {
+      try {
+        // Call the delete mutation
+        await deleteUser(userToDelete).unwrap();
+        toast.success("User deleted successfully!");
+        closeModal(); // Close the modal after successful deletion
+      } catch (error: any) {
+        toast.error(error?.message || "Error deleting user");
+      }
     }
+  };
+
+  // Open the confirmation modal
+  const openModal = (userId: string) => {
+    setUserToDelete(userId);
+    setIsModalOpen(true);
+  };
+
+  // Close the confirmation modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setUserToDelete(null);
   };
 
   if (isFetching && isLoading) {
@@ -116,7 +135,7 @@ const ManageUsers = () => {
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
-                            className=" border-neutral-300"
+                            className="border-neutral-300"
                             size="sm"
                             disabled={loadingUserId === user._id}
                           >
@@ -126,7 +145,7 @@ const ManageUsers = () => {
                             <ChevronDown className="ml-1 h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className=" bg-white border-neutral-300">
+                        <DropdownMenuContent className="bg-white border-neutral-300">
                           <DropdownMenuItem
                             className="cursor-pointer border my-2"
                             onClick={() =>
@@ -158,7 +177,7 @@ const ManageUsers = () => {
                       <MdDelete
                         className="text-red-500 cursor-pointer"
                         size={25}
-                        onClick={() => handleDeleteUser(user._id as string)} // Add click handler to delete
+                        onClick={() => openModal(user._id as string)} // Open modal when clicked
                       />
                     </TableCell>
                   </TableRow>
@@ -167,6 +186,33 @@ const ManageUsers = () => {
           </Table>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+            <h3 className="text-xl font-semibold">Confirm Deletion</h3>
+            <p className="mt-4 text-sm text-gray-700">
+              Are you sure you want to delete this user? This action cannot be
+              undone.
+            </p>
+            <div className="mt-6 flex justify-between">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-300 rounded-md text-gray-800"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteUser} // Proceed with deletion
+                className="px-4 py-2 bg-red-600 text-white rounded-md"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
