@@ -13,6 +13,7 @@ import { ImProfile } from "react-icons/im";
 import { SlLogout } from "react-icons/sl";
 import MyProfile from "@/pages/UserDashboard/MyProfile";
 import UpdateProfile from "@/pages/UserDashboard/UpdateProfile";
+import DashboardFooter from "../shared/DashboardFooter";
 
 const { Content, Sider } = Layout;
 
@@ -56,14 +57,17 @@ const UserDashboardLayout: FC = () => {
 
   return (
     <Layout>
-      <Sider breakpoint="lg" collapsedWidth="0">
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        className="bg-[#115E59] min-h-screen"
+      >
         <h2 className="my-5 p-2 text-white font-orbitron font-bold text-center">
           User Dashboard
         </h2>
-        <Menu
-          theme="dark"
+        {/* <Menu
           mode="inline"
-          className="text-[14px]"
+          className="text-[14px] bg-[#115E59]"
           defaultSelectedKeys={["1"]}
           onClick={(e) => setSelectedKey(e.key)}
         >
@@ -72,11 +76,47 @@ const UserDashboardLayout: FC = () => {
               {item.label}
             </Menu.Item>
           ))}
-          {/* Fix Logout issue by adding onClick event here */}
           <Menu.Item
             key="5"
             icon={<SlLogout size={25} />}
             onClick={handleLogOut}
+          >
+            Logout
+          </Menu.Item>
+        </Menu> */}
+        <Menu
+          mode="inline"
+          className="font-orbitron text-[14px] bg-[#115E59]"
+          selectedKeys={[selectedKey]}
+          onClick={(e) => {
+            if (e.key === "logout") {
+              handleLogOut();
+            } else {
+              setSelectedKey(e.key);
+            }
+          }}
+        >
+          {menuItems.map((item) => (
+            <Menu.Item
+              key={item.key}
+              icon={item.icon}
+              style={{
+                color: "white",
+                backgroundColor:
+                  selectedKey === item.key ? "#077A7D" : "transparent",
+              }}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+          <Menu.Item
+            key="logout"
+            icon={<SlLogout size={25} />}
+            style={{
+              color: "white",
+              backgroundColor:
+                selectedKey === "logout" ? "#077A7D" : "transparent",
+            }}
           >
             Logout
           </Menu.Item>
@@ -101,7 +141,7 @@ const UserDashboardLayout: FC = () => {
             {selectedComponent} {/* Show the selected component */}
           </div>
         </Content>
-        <Footer />
+        <DashboardFooter />
       </Layout>
     </Layout>
   );

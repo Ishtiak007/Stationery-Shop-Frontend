@@ -64,7 +64,7 @@ const DashboardLayout: FC = () => {
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        className="bg-[#115E59] h-screen"
+        className="bg-[#115E59] min-h-screen"
       >
         <h2 className="my-5 p-2 text-white font-orbitron font-bold text-center">
           Admin Dashboard
