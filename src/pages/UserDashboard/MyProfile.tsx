@@ -26,15 +26,15 @@ const MyProfile = () => {
     <>
       <div className="">
         <h2 className="text-xl px-1 font-black dark:text-white text-center">
-          My Profile
+          Profile
         </h2>
         {/* Profile image section */}
         <div className=" mt-6 border shadow-md border-gray-200 p-4 flex flex-col justify-center items-center">
           <div className=" flex items-center gap-6">
-            <div className="lg:size-[120px] bg-teal-300 rounded-full flex justify-center items-center">
+            {/* <div className="lg:size-[120px] bg-teal-300 rounded-full flex justify-center items-center">
               <h1 className="text-center">{name}'s Profile image</h1>
-            </div>
-            <div className="font-medium text-sm">
+            </div> */}
+            <div className="font-medium text-sm text-center">
               <h2 className="text-3xl ">
                 {(name ?? "").charAt(0).toUpperCase() + (name ?? "").slice(1)}
               </h2>

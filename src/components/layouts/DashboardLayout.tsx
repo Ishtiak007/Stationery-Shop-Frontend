@@ -14,6 +14,8 @@ import { TbReorder } from "react-icons/tb";
 import AddProducts from "@/pages/Admin/AddProducts";
 import ManageOrders from "@/pages/Admin/ManageOrders";
 import DashboardFooter from "../shared/DashboardFooter";
+import { CgProfile } from "react-icons/cg";
+import MyProfile from "@/pages/UserDashboard/MyProfile";
 
 const { Content, Sider } = Layout;
 
@@ -32,24 +34,30 @@ const DashboardLayout: FC = () => {
   const menuItems = [
     {
       key: "1",
+      icon: <CgProfile size={25} />,
+      label: "Profile",
+      component: <MyProfile />,
+    },
+    {
+      key: "2",
       icon: <UserRoundPen size={25} />,
       label: "Manage Users",
       component: <ManageUsers />,
     },
     {
-      key: "2",
+      key: "3",
       icon: <MdProductionQuantityLimits size={25} />,
       label: "Add Product",
       component: <AddProducts />,
     },
     {
-      key: "3",
+      key: "4",
       icon: <TbReorder size={25} />,
       label: "Manage Orders",
       component: <ManageOrders />,
     },
     {
-      key: "4",
+      key: "5",
       icon: <SiManageiq size={25} />,
       label: "Manage Products",
       component: <ManageProducts />,

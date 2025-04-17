@@ -5,7 +5,6 @@ import { useAppDispatch } from "@/redux/hooks";
 import { FaHome } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import ManageUsers from "@/pages/Admin/ManageUsers";
-import ManageOrders from "@/pages/Admin/ManageOrders";
 import { LuListOrdered } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { ImProfile } from "react-icons/im";
@@ -13,6 +12,7 @@ import { SlLogout } from "react-icons/sl";
 import MyProfile from "@/pages/UserDashboard/MyProfile";
 import UpdateProfile from "@/pages/UserDashboard/UpdateProfile";
 import DashboardFooter from "../shared/DashboardFooter";
+import ManageOrdersUser from "@/pages/UserDashboard/ManageOrdersUser";
 
 const { Content, Sider } = Layout;
 
@@ -33,15 +33,15 @@ const UserDashboardLayout: FC = () => {
   const menuItems = [
     {
       key: "1",
-      icon: <LuListOrdered size={25} />,
-      label: "Recent Orders",
-      component: <ManageOrders />,
-    },
-    {
-      key: "2",
       icon: <CgProfile size={25} />,
       label: "Profile",
       component: <MyProfile />,
+    },
+    {
+      key: "2",
+      icon: <LuListOrdered size={25} />,
+      label: "Recent Orders",
+      component: <ManageOrdersUser />,
     },
     {
       key: "3",
