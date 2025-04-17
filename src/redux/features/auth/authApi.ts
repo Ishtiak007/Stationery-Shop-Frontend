@@ -75,6 +75,16 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+
+    // Update user status
+    updateStatus: builder.mutation({
+      query: ({ userId, status }) => ({
+        url: `/users/update-status/${userId}`,
+        method: "PATCH",
+        body: { status }, // Ensure you're sending both userId and the new status
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
@@ -85,4 +95,5 @@ export const {
   useAllUsersQuery,
   useUpdateProfileMutation,
   useDeleteUserMutation,
+  useUpdateStatusMutation,
 } = authApi;

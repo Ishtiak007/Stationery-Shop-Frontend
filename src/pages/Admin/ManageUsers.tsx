@@ -1,6 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { useUserStatusUpdateMutation } from "@/redux/features/admin/adminApi";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 import clsx from "clsx";
 import {
@@ -13,24 +18,17 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+import Loading from "@/components/ui/Loading";
 import { useAllUsersQuery } from "@/redux/features/auth/authApi";
 import { TUser } from "@/types/userTypes";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import Loading from "@/components/ui/Loading";
-import { MdDeleteOutline } from "react-icons/md";
+import { useUpdateUserStatusMutation } from "@/redux/features/admin/adminApi"; // Import the new mutation
 
 const ManageUsers = () => {
   const { data: userData, isLoading, isFetching } = useAllUsersQuery(undefined);
   const usersInfo = userData?.data || [];
 
-  const [updateStatus] = useUserStatusUpdateMutation();
+  // Use the update status mutation hook
+  const [updateUserStatus] = useUpdateUserStatusMutation();
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
 
   const handleStatusChange = async (
@@ -40,31 +38,24 @@ const ManageUsers = () => {
   ) => {
     if (currentStatus === newStatus) return;
 
-    setLoadingUserId(userId);
+    setLoadingUserId(userId); // Set loading state for this user
     try {
-      const res = await updateStatus({ userId }).unwrap();
-      toast.success(res.message);
+      // Call the mutation to update the status
+      const res = await updateUserStatus({
+        userId,
+        status: newStatus,
+      }).unwrap();
+      toast.success(res.message); // Show success message
     } catch (error: any) {
-      toast.error(error.data.message);
+      toast.error(error.data.message); // Show error message
     } finally {
-      setLoadingUserId(null);
+      setLoadingUserId(null); // Reset loading state
     }
   };
 
   if (isFetching && isLoading) {
-    return <Loading />;
+    return <Loading />; // Show loading spinner if data is fetching
   }
-
-  // const handleDelete = async (userId: string) => {
-  //   if (confirm("Are you sure you want to delete this user?")) {
-  //     try {
-  //       await deleteUser(userId);
-  //       toast.success("User deleted successfully!");
-  //     } catch (error) {
-  //       toast.error("Failed to delete user");
-  //     }
-  //   }
-  // };
 
   return (
     <>
@@ -82,7 +73,6 @@ const ManageUsers = () => {
                 <TableHead>Phone</TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Ban User</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -100,8 +90,8 @@ const ManageUsers = () => {
                     <TableCell
                       className={clsx(
                         "flex items-center gap-2",
-                        user.status === "active" && "text-green-700",
-                        user.status === "blocked" && "text-blue-700"
+                        user.status === "active" && "text-green-500",
+                        user.status === "blocked" && "text-secondary"
                       )}
                     >
                       <DropdownMenu>
@@ -142,15 +132,6 @@ const ManageUsers = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                    </TableCell>
-                    <TableCell>
-                      <span className="flex items-center gap-1 text-red-600 cursor-pointer">
-                        <MdDeleteOutline
-                          // onClick={() => handleDelete()}
-                          size={18}
-                        />
-                        Ban
-                      </span>
                     </TableCell>
                   </TableRow>
                 ))}

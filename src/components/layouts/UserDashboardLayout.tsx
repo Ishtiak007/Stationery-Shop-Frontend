@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { Layout, Menu, theme } from "antd";
-import Footer from "../shared/Footer";
 import { logOut } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { FaHome } from "react-icons/fa";

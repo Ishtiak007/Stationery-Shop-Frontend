@@ -2,7 +2,8 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    userStatusUpdate: builder.mutation({
+    // user status update
+    userProfileUpdate: builder.mutation({
       query: (data) => ({
         url: "/users/update-profile",
         method: "PATCH",
@@ -10,6 +11,8 @@ const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+
+    // update status
     updateOrderStatus: builder.mutation({
       query: ({ orderId, status }) => ({
         url: `/orders/${orderId}`,
@@ -18,19 +21,31 @@ const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["orders"],
     }),
+
+    // delete order
     deleteOrder: builder.mutation<void, string>({
       query: (orderId) => ({
-        url: `/orders/${orderId}`, // Specify the path to your API endpoint
-        method: "DELETE", // Use the DELETE method
+        url: `/orders/${orderId}`,
+        method: "DELETE",
       }),
-      // Invalidate the 'orders' cache after deletion
       invalidatesTags: ["orders"],
+    }),
+
+    // update status
+    updateUserStatus: builder.mutation({
+      query: ({ userId, status }) => ({
+        url: `/users/${userId}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
 export const {
-  useUserStatusUpdateMutation,
+  useUserProfileUpdateMutation,
   useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
+  useUpdateUserStatusMutation,
 } = adminApi;

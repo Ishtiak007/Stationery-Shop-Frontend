@@ -13,12 +13,39 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import { Store, Check } from "lucide-react";
 import { useAddProductMutation } from "@/redux/features/products/productsApi";
 import { TProducts } from "@/types/productTypes";
 
+const defaultValues = {
+  name: "Colorful Sticky Notes",
+  author: "John Doe",
+  description: "A set of colorful sticky notes for office and school use.",
+  category: "Sticky Notes",
+  price: 5,
+  stockQuantity: 250,
+  brand: "NoteMaster",
+  color: "Multicolor",
+  size: "3x3 inches",
+  material: "Paper",
+  sku: "SN006",
+  rating: 4,
+  isFeatured: true,
+  tags: ["office", "stationery", "notes"],
+  discount: {
+    percentage: "15",
+    validUntil: "2025-12-31T23:59:59.000Z",
+  },
+  status: "available",
+  productImg:
+    "https://res.cloudinary.com/dzhou2pgk/image/upload/v1740090362/shoes.jpg",
+};
+
 const AddProducts = () => {
   const [addProduct] = useAddProductMutation();
-  const { handleSubmit, register } = useForm({});
+  const { handleSubmit, register } = useForm({
+    defaultValues,
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = async (
     data: Partial<TProducts>
@@ -55,6 +82,13 @@ const AddProducts = () => {
     };
     const stringifyData = JSON.stringify(productData);
 
+    console.log(stringifyData);
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(productData));
+    if (data.productImg && data.productImg[0]) {
+      formData.append("file", data.productImg[0]);
+    }
+
     try {
       const res = await addProduct(stringifyData);
 
@@ -69,8 +103,8 @@ const AddProducts = () => {
   return (
     <Card className="max-w-3xl mx-auto mt-10 p-6 shadow-lg rounded-lg">
       <CardHeader>
-        <CardTitle className="flex font-orbitron items-center gap-2 text-xl font-semibold mx-auto">
-          Add Product
+        <CardTitle className="flex font-orbitron items-center gap-2 text-xl font-semibold">
+          <Store /> Add New Product
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -86,17 +120,24 @@ const AddProducts = () => {
               />
             </div>
             <div>
-              <Label>Brand Name</Label>
+              <Label>Brand</Label>
               <Input
                 type="text"
                 {...register("brand")}
-                placeholder="Enter product brand"
+                placeholder="Enter brand"
                 required
               />
             </div>
-
+            <div className="md:col-span-2">
+              <Label>Description</Label>
+              <Textarea
+                {...register("description")}
+                placeholder="Enter product description"
+                required
+              />
+            </div>
             <div>
-              <Label>Price Range</Label>
+              <Label>Price</Label>
               <Input
                 type="number"
                 {...register("price")}
@@ -141,11 +182,11 @@ const AddProducts = () => {
               />
             </div>
             <div>
-              <Label>Stock Keeping Unit</Label>
+              <Label>SKU</Label>
               <Input
                 type="text"
                 {...register("sku")}
-                placeholder="Enter Stock Keeping Unit"
+                placeholder="Enter SKU"
                 required
               />
             </div>
@@ -169,15 +210,15 @@ const AddProducts = () => {
               />
             </div>
             <div>
-              <Label>Tags (use commas to separate)</Label>
+              <Label>Tags (comma separated)</Label>
               <Input
                 type="text"
                 {...register("tags")}
-                placeholder="Enter product tags -use commas to separate"
+                placeholder="Enter product tags"
               />
             </div>
             <div>
-              <Label>Author Name</Label>
+              <Label>Author</Label>
               <Input
                 type="text"
                 {...register("author")}
@@ -185,12 +226,12 @@ const AddProducts = () => {
                 required
               />
             </div>
-            <div className="border rounded-md p-2">
-              <Label>Choose a Category</Label>
+            <div>
+              <Label>Category</Label>
               <select
                 {...register("category")}
                 defaultValue="Pencils"
-                className="form-select cursor-pointer"
+                className="form-select"
               >
                 <option value="Notebooks">Notebooks</option>
                 <option value="Pens">Pens</option>
@@ -206,48 +247,29 @@ const AddProducts = () => {
               </select>
             </div>
             <div>
-              <Label>Product Status</Label>
+              <Label>Status</Label>
               <Select {...register("status")}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
-                <SelectContent className="text-white cursor-pointer bg-black">
-                  <SelectItem className="cursor-pointer" value="available">
-                    Available
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="out_of_stock">
-                    Out of Stock
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="discontinued">
-                    Discontinued
-                  </SelectItem>
+                <SelectContent className="text-purple-600 bg-black">
+                  <SelectItem value="available">Available</SelectItem>
+                  <SelectItem value="out_of_stock">Out of Stock</SelectItem>
+                  <SelectItem value="discontinued">Discontinued</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <div className="md:col-span-2">
+            <div>
               <Label>Product Image</Label>
               <Input type="file" {...register("productImg")} />
             </div>
-
-            <div className="md:col-span-2">
-              <Label>Description</Label>
-              <Textarea
-                {...register("description")}
-                placeholder="Enter product description"
-                required
-              />
-            </div>
             <div className="flex items-center space-x-2">
-              <Label htmlFor="isFeatured">Is this featured product?</Label>
               <Checkbox id="isFeatured" {...register("isFeatured")} />
+              <Label htmlFor="isFeatured">Featured Product?</Label>
             </div>
           </div>
-          <Button
-            type="submit"
-            className="w-full hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-md 
-        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
-          >
-            Add This Product
+          <Button type="submit" className="w-full flex items-center gap-2">
+            <Check /> Submit
           </Button>
         </form>
       </CardContent>
