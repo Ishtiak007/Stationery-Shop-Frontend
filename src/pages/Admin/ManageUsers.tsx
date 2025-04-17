@@ -103,14 +103,14 @@ const ManageUsers = () => {
         <div className="mt-10">
           <Table>
             <TableHeader>
-              <TableRow className="border-neutral-400 text-primary-text font-semibold text-[10px]">
+              <TableRow className="border-neutral-400 text-primary-text font-bold text-[15px]">
                 <TableHead>Name</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Action</TableHead>
+                <TableHead>Remove User</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
