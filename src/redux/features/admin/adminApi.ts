@@ -40,6 +40,15 @@ const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+
+    // Delete user
+    deleteUser: builder.mutation({
+      query: (userId) => ({
+        url: `/users/${userId}`, // Make sure the URL matches your backend route
+        method: "DELETE", // Using DELETE method
+      }),
+      invalidatesTags: ["user"], // You may want to invalidate the "user" tag to refresh data after deletion
+    }),
   }),
 });
 
@@ -48,4 +57,5 @@ export const {
   useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
   useUpdateUserStatusMutation,
+  useDeleteUserMutation,
 } = adminApi;

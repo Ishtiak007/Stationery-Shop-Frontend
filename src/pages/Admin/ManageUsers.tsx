@@ -21,16 +21,23 @@ import { toast } from "sonner";
 import Loading from "@/components/ui/Loading";
 import { useAllUsersQuery } from "@/redux/features/auth/authApi";
 import { TUser } from "@/types/userTypes";
-import { useUpdateUserStatusMutation } from "@/redux/features/admin/adminApi"; // Import the new mutation
+import {
+  useUpdateUserStatusMutation,
+  useDeleteUserMutation,
+} from "@/redux/features/admin/adminApi";
+import { MdDelete } from "react-icons/md";
 
 const ManageUsers = () => {
   const { data: userData, isLoading, isFetching } = useAllUsersQuery(undefined);
   const usersInfo = userData?.data || [];
 
-  // Use the update status mutation hook
+  // Hooks for update status and delete user
   const [updateUserStatus] = useUpdateUserStatusMutation();
+  const [deleteUser] = useDeleteUserMutation();
+
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
 
+  // Handle updating the user status (active / blocked)
   const handleStatusChange = async (
     userId: string,
     currentStatus: string,
@@ -50,6 +57,17 @@ const ManageUsers = () => {
       toast.error(error.data.message); // Show error message
     } finally {
       setLoadingUserId(null); // Reset loading state
+    }
+  };
+
+  // Handle deleting the user
+  const handleDeleteUser = async (userId: string) => {
+    try {
+      // Call the delete mutation
+      await deleteUser(userId).unwrap();
+      toast.success("User deleted successfully!");
+    } catch (error: any) {
+      toast.error(error?.message || "Error deleting user");
     }
   };
 
@@ -73,6 +91,7 @@ const ManageUsers = () => {
                 <TableHead>Phone</TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -91,7 +110,7 @@ const ManageUsers = () => {
                       className={clsx(
                         "flex items-center gap-2",
                         user.status === "active" && "text-green-500",
-                        user.status === "blocked" && "text-secondary"
+                        user.status === "blocked" && "text-red-500"
                       )}
                     >
                       <DropdownMenu>
@@ -107,8 +126,9 @@ const ManageUsers = () => {
                             <ChevronDown className="ml-1 h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className=" bg-primary-bg border-neutral-300">
+                        <DropdownMenuContent className=" bg-white border-neutral-300">
                           <DropdownMenuItem
+                            className="cursor-pointer border my-2"
                             onClick={() =>
                               handleStatusChange(
                                 user._id as string,
@@ -120,6 +140,7 @@ const ManageUsers = () => {
                             Active
                           </DropdownMenuItem>
                           <DropdownMenuItem
+                            className="cursor-pointer border"
                             onClick={() =>
                               handleStatusChange(
                                 user._id as string,
@@ -132,6 +153,13 @@ const ManageUsers = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
+                    </TableCell>
+                    <TableCell>
+                      <MdDelete
+                        className="text-red-500 cursor-pointer"
+                        size={25}
+                        onClick={() => handleDeleteUser(user._id as string)} // Add click handler to delete
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
