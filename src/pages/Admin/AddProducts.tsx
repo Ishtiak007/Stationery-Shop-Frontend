@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,88 +14,41 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Store, Check } from "lucide-react";
-import { useAddProductMutation } from "@/redux/features/products/productsApi";
 import { TProducts } from "@/types/productTypes";
-
-const defaultValues = {
-  name: "Colorful Sticky Notes",
-  author: "John Doe",
-  description: "A set of colorful sticky notes for office and school use.",
-  category: "Sticky Notes",
-  price: 5,
-  stockQuantity: 250,
-  brand: "NoteMaster",
-  color: "Multicolor",
-  size: "3x3 inches",
-  material: "Paper",
-  sku: "SN006",
-  rating: 4,
-  isFeatured: true,
-  tags: ["office", "stationery", "notes"],
-  discount: {
-    percentage: "15",
-    validUntil: "2025-12-31T23:59:59.000Z",
-  },
-  status: "available",
-  productImg:
-    "https://res.cloudinary.com/dzhou2pgk/image/upload/v1740090362/shoes.jpg",
-};
+import { useAddProductsMutation } from "@/redux/features/products/productsApi";
 
 const AddProducts = () => {
-  const [addProduct] = useAddProductMutation();
-  const { handleSubmit, register } = useForm({
-    defaultValues,
-  });
+  const [addProduct] = useAddProductsMutation();
+  const { handleSubmit, register } = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> = async (
-    data: Partial<TProducts>
-  ) => {
+  const onSubmit = async (data: Partial<TProducts>) => {
     const toastId = toast.loading("Loading...");
-    const productData = {
-      name: data.name,
-      author: data.author,
-      description: data.description,
-      category: data.category,
-      price: data.price,
-      stockQuantity: data.stockQuantity,
-      brand: data.brand,
-      color: data.color,
-      size: data.size,
-      material: data.material,
-      sku: data.sku,
-      rating: data.rating,
-      isFeatured: data.isFeatured,
-      tags: data.tags,
-      status: data.status,
-      discount: data.discount?.percentage
-        ? {
-            percentage: data.discount.percentage.toString(),
-            validUntil: data.discount.validUntil
-              ? new Date(data.discount.validUntil).toISOString()
-              : new Date().toISOString(),
-          }
-        : undefined,
-      productImg:
-        data.productImg && data.productImg[0]
-          ? (data.productImg[0] as string)
-          : undefined,
-    };
-    const stringifyData = JSON.stringify(productData);
 
-    console.log(stringifyData);
+    // Create formData object
     const formData = new FormData();
-    formData.append("data", JSON.stringify(productData));
+
+    // Append regular fields
+    Object.keys(data).forEach((key) => {
+      if (data[key] !== undefined && key !== "productImg") {
+        formData.append(key, data[key]);
+      }
+    });
+
+    // Append file (image)
     if (data.productImg && data.productImg[0]) {
       formData.append("file", data.productImg[0]);
     }
 
     try {
-      const res = await addProduct(stringifyData);
+      // Call the API to add the product
+      const res = await addProduct(formData);
 
       if (res.data) {
-        toast.success(res.data.message, { id: toastId });
+        toast.success("Product added successfully!", { id: toastId });
+      } else {
+        toast.error("Failed to add product", { id: toastId });
       }
-    } catch {
+    } catch (error) {
       toast.error("Something went wrong", { id: toastId });
     }
   };
@@ -228,11 +181,7 @@ const AddProducts = () => {
             </div>
             <div>
               <Label>Category</Label>
-              <select
-                {...register("category")}
-                defaultValue="Pencils"
-                className="form-select"
-              >
+              <select {...register("category")} className="form-select">
                 <option value="Notebooks">Notebooks</option>
                 <option value="Pens">Pens</option>
                 <option value="Pencils">Pencils</option>

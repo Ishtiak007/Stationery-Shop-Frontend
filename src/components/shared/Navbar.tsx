@@ -83,6 +83,9 @@ const Navbar = () => {
             <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/dashboard"}>Dashboard</Link>
             </button>
+            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+              <Link to={"/login"}>Login</Link>
+            </button>
           </div>
         </div>
 

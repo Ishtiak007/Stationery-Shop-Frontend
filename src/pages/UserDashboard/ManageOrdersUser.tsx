@@ -86,7 +86,7 @@ const ManageOrdersUser = () => {
                     <TableRow key={order._id} className="border-neutral-400">
                       <TableCell>{order.user}</TableCell>
                       <TableCell>{order?._id || "01223sz"}</TableCell>
-                      <TableCell>{order.totalPrice}</TableCell>
+                      <TableCell>৳ {order.totalPrice}</TableCell>
                       <TableCell>{order?.status || "paid"}</TableCell>
                       <TableCell>
                         {order?.transaction?.method || "shurjopay"}

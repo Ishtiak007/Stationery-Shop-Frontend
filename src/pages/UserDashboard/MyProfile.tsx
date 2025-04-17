@@ -58,7 +58,7 @@ const MyProfile = () => {
             className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
         transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white hover:border-none my-4"
           >
-            Edit Profile
+            Update Profile
             <FaUserPen size={25} />
           </button>
         </div>

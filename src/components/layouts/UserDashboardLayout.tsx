@@ -40,7 +40,7 @@ const UserDashboardLayout: FC = () => {
     {
       key: "2",
       icon: <LuListOrdered size={25} />,
-      label: "Recent Orders",
+      label: "Order history",
       component: <ManageOrdersUser />,
     },
     {

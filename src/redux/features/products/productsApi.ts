@@ -28,13 +28,13 @@ const productsApi = baseApi.injectEndpoints({
       },
     }),
     // add product
-    addProduct: builder.mutation({
+    AddProducts: builder.mutation({
       query: (data) => ({
-        url: "/products/create-product",
-        method: "POST",
-        data: data,
+        url: "/products/create-product", // Endpoint for creating a product
+        method: "POST", // HTTP method POST for creating a new resource
+        body: data, // The product data to be sent in the request body
       }),
-      invalidatesTags: ["product"],
+      invalidatesTags: ["product"], // Invalidate the product cache to refresh data after creation
     }),
 
     // Update product
@@ -60,7 +60,7 @@ const productsApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllProductsQuery,
-  useAddProductMutation,
+  useAddProductsMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
 } = productsApi;
