@@ -9,6 +9,7 @@ import AllStationeryProducts from "@/pages/AllProducts/AllStationeryProducts";
 import ProductDetails from "@/pages/AllProducts/ProductDetails";
 import Cart from "@/pages/Cart/Cart";
 import OrderVerification from "@/pages/Cart/VerifyOrder";
+import About from "@/pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/all-product",
