@@ -41,6 +41,16 @@ const adminApi = baseApi.injectEndpoints({
       invalidatesTags: ["user"],
     }),
 
+    // update role
+    updateUserRole: builder.mutation({
+      query: ({ userId, role }) => ({
+        url: `/users/${userId}/role`,
+        method: "PATCH",
+        body: { role },
+      }),
+      invalidatesTags: ["user"],
+    }),
+
     // Delete user
     deleteUser: builder.mutation({
       query: (userId) => ({
@@ -58,4 +68,5 @@ export const {
   useDeleteOrderMutation,
   useUpdateUserStatusMutation,
   useDeleteUserMutation,
+  useUpdateUserRoleMutation,
 } = adminApi;

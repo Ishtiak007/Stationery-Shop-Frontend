@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "sonner";
 import moment from "moment";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -6,10 +7,12 @@ import { verifyToken } from "@/utils/verifyToken";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { TProducts } from "@/types/productTypes";
+
 interface DecodedToken {
   role: string;
   email?: string;
 }
+
 const ProductDetailsCard = ({ product }: { product: TProducts }) => {
   const navigate = useNavigate();
   const {
@@ -23,12 +26,14 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
     brand,
     _id,
   } = product;
+
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
   let user: DecodedToken | null = null;
   if (token) {
     user = verifyToken(token);
   }
+
   const handleAddToCart = () => {
     if (!user) {
       toast.error("Sign in before adding to cart!");
@@ -40,9 +45,9 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
         addToCart({
           product: _id,
           name,
-          price,
+          price: parseFloat(price),
           quantity: 1,
-          stock: stockQuantity,
+          stock: parseInt(stockQuantity as any),
           image: productImg as string,
           userEmail: user?.email,
         })
@@ -70,9 +75,9 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
         addToCart({
           product: _id,
           name,
-          price,
+          price: parseFloat(price),
           quantity: 1,
-          stock: stockQuantity,
+          stock: parseInt(stockQuantity as any),
           image: productImg as string,
           userEmail: user.email,
         })
@@ -99,7 +104,7 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
           </p>
         </div>
         <p className="text-gray-600 text-base">{description}</p>
-        <p className="text-lg font-semibold"> {price} Tk</p>
+        <p className="text-lg font-semibold">{parseFloat(price)} Tk</p>
 
         {discount && (
           <p className="text-base text-green-800">

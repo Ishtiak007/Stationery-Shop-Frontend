@@ -38,14 +38,14 @@ const productsApi = baseApi.injectEndpoints({
     }),
 
     // Update product
-    updateProduct: builder.mutation({
-      query: ({ productId, data }) => ({
-        url: `/products/${productId}`,
-        method: "PATCH",
-        data: data,
-      }),
-      invalidatesTags: ["product"], // Invalidate the product cache to refresh data after update
-    }),
+    // updateProduct: builder.mutation({
+    //   query: ({ productId, data }) => ({
+    //     url: `/products/${productId}`,
+    //     method: "PATCH",
+    //     data: data,
+    //   }),
+    //   invalidatesTags: ["product"], // Invalidate the product cache to refresh data after update
+    // }),
 
     // Delete product
     deleteProduct: builder.mutation({
@@ -61,6 +61,5 @@ const productsApi = baseApi.injectEndpoints({
 export const {
   useGetAllProductsQuery,
   useAddProductsMutation,
-  useUpdateProductMutation,
   useDeleteProductMutation,
 } = productsApi;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -24,6 +25,7 @@ import { TUser } from "@/types/userTypes";
 import {
   useUpdateUserStatusMutation,
   useDeleteUserMutation,
+  useUpdateUserRoleMutation,
 } from "@/redux/features/admin/adminApi";
 import { MdDelete } from "react-icons/md";
 
@@ -33,6 +35,7 @@ const ManageUsers = () => {
 
   // Hooks for update status and delete user
   const [updateUserStatus] = useUpdateUserStatusMutation();
+  const [updateUserRole] = useUpdateUserRoleMutation();
   const [deleteUser] = useDeleteUserMutation();
 
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
@@ -55,6 +58,29 @@ const ManageUsers = () => {
       const res = await updateUserStatus({
         userId,
         status: newStatus,
+      }).unwrap();
+      toast.success(res.message); // Show success message
+    } catch (error: any) {
+      toast.error(error.data.message); // Show error message
+    } finally {
+      setLoadingUserId(null); // Reset loading state
+    }
+  };
+
+  // Handle updating the user status (active / blocked)
+  const handleRoleChange = async (
+    userId: string,
+    currentRole: string,
+    newRole: "admin" | "user"
+  ) => {
+    if (currentRole === newRole) return;
+
+    setLoadingUserId(userId); // Set loading state for this user
+    try {
+      // Call the mutation to update the status
+      const res = await updateUserRole({
+        userId,
+        role: newRole,
       }).unwrap();
       toast.success(res.message); // Show success message
     } catch (error: any) {
@@ -105,12 +131,12 @@ const ManageUsers = () => {
             <TableHeader>
               <TableRow className="border-neutral-400 text-primary-text font-bold text-[15px]">
                 <TableHead>Name</TableHead>
-                <TableHead>Role</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Remove User</TableHead>
+                <TableHead>Update Role</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -121,10 +147,10 @@ const ManageUsers = () => {
                     className="border-neutral-400 text-primary-text text-[10px] md:text-[14px] lg:text-sm font-serif"
                   >
                     <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.role}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.phone}</TableCell>
                     <TableCell>{user.address}</TableCell>
+                    {/* active and block */}
                     <TableCell
                       className={clsx(
                         "flex items-center gap-2",
@@ -173,12 +199,63 @@ const ManageUsers = () => {
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
+
                     <TableCell>
                       <MdDelete
-                        className="text-red-500 cursor-pointer"
+                        className="text-red-400 cursor-pointer"
                         size={25}
                         onClick={() => openModal(user._id as string)} // Open modal when clicked
                       />
+                    </TableCell>
+
+                    {/* admin and user */}
+                    <TableCell
+                      className={clsx(
+                        "flex items-center gap-2",
+                        user.role === "admin" && "text-green-500",
+                        user.role === "user" && "text-blue-500"
+                      )}
+                    >
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            className="border-neutral-300"
+                            size="sm"
+                            disabled={loadingUserId === user._id}
+                          >
+                            {loadingUserId === user._id
+                              ? "Updating..."
+                              : user.role}
+                            <ChevronDown className="ml-1 h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="bg-white border-neutral-300">
+                          <DropdownMenuItem
+                            className="cursor-pointer border my-2"
+                            onClick={() =>
+                              handleRoleChange(
+                                user._id as string,
+                                user.role,
+                                "admin"
+                              )
+                            }
+                          >
+                            Admin
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            className="cursor-pointer border"
+                            onClick={() =>
+                              handleRoleChange(
+                                user._id as string,
+                                user.role,
+                                "user"
+                              )
+                            }
+                          >
+                            User
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                   </TableRow>
                 ))}
