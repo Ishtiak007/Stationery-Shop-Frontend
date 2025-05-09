@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,29 +11,6 @@ import { Check } from "lucide-react";
 import { TProducts } from "@/types/productTypes";
 import { useAddProductsMutation } from "@/redux/features/products/productsApi";
 import { useNavigate } from "react-router-dom";
-
-const defaultValues = {
-  name: "Smart Pen Pro",
-  author: "John Doe",
-  description:
-    "An advanced pen with built-in smart features for digital note-taking.",
-  category: "Pens",
-  price: 39,
-  stockQuantity: 200,
-  brand: "TechPen",
-  color: "Silver",
-  size: "Medium",
-  material: "Aluminum, Ink",
-  sku: "SP0012",
-  rating: 4,
-  isFeatured: false,
-  tags: "office,technology,pen,digital",
-  discount: {
-    percentage: 15,
-    validUntil: "2025-12-31T23:59:59.000Z",
-  },
-  status: "available",
-};
 
 const AddProducts = () => {
   const [addProduct] = useAddProductsMutation();

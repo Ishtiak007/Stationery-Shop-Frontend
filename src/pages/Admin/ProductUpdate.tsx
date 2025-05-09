@@ -57,8 +57,9 @@ const ProductUpdate = () => {
       isFeatured: Boolean(data.isFeatured),
       tags:
         typeof data.tags === "string"
-          ? data.tags.split(",").map((tag: string) => tag.trim())
+          ? (data.tags as string).split(",").map((tag) => tag.trim())
           : [],
+
       status: data.status,
       discount: data.discount?.percentage
         ? {

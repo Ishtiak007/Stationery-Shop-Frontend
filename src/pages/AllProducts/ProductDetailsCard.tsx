@@ -45,7 +45,7 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
         addToCart({
           product: _id,
           name,
-          price: parseFloat(price),
+          price: price,
           quantity: 1,
           stock: parseInt(stockQuantity as any),
           image: productImg as string,
@@ -75,7 +75,7 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
         addToCart({
           product: _id,
           name,
-          price: parseFloat(price),
+          price: price,
           quantity: 1,
           stock: parseInt(stockQuantity as any),
           image: productImg as string,
@@ -104,7 +104,7 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
           </p>
         </div>
         <p className="text-gray-600 text-base">{description}</p>
-        <p className="text-lg font-semibold">{parseFloat(price)} Tk</p>
+        <p className="text-lg font-semibold">{price} Tk</p>
 
         {discount && (
           <p className="text-base text-green-800">

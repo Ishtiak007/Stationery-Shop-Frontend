@@ -93,14 +93,14 @@ const Navbar = () => {
 
           {user ? (
             <div onClick={handleLogOut}>
-              <span className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center font-medium rounded-full hover:bg-teal-800 hover:text-white my-4 mt-2 bg-teal-700 text-white text-sm sm:text-base">
+              <span className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center font-medium rounded-xl hover:bg-teal-800 hover:text-white my-4 mt-2 bg-teal-700 text-white text-sm sm:text-base">
                 <LogOutIcon className="w-6 h-6" /> Logout
               </span>
             </div>
           ) : (
             <div className="hidden lg:flex">
               <Link to={"/login"}>
-                <span className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center font-medium rounded-full hover:bg-teal-800 hover:text-white my-4 mt-2 bg-teal-700 text-white text-sm sm:text-base">
+                <span className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center font-medium rounded-xl hover:bg-teal-800 hover:text-white my-4 mt-2 bg-teal-700 text-white text-sm sm:text-base">
                   <LogIn className="w-6 h-6" /> Login
                 </span>
               </Link>

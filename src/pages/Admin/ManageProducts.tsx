@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -41,7 +43,7 @@ const ManageProducts = () => {
     }
   };
 
-  const openModal = (productId: string) => {
+  const openModal = (productId: any) => {
     setProductToDelete(productId);
     setIsModalOpen(true); // Open the modal when delete is clicked
   };
