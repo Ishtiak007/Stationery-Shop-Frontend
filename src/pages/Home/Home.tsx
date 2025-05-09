@@ -4,6 +4,7 @@ import CustomerFavorites from "./CustomerFavorites/CustomerFavorites";
 import FAQSection from "./FAQ/FAQsection";
 import Newsletter from "./Newsletter/Newsletter";
 import Services from "./Services/Services";
+import StatsSection from "./StatsSection/StatsSection";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <CustomerFavorites />
       <FAQSection />
       <Blog />
+      <StatsSection />
       <Newsletter />
     </div>
   );
