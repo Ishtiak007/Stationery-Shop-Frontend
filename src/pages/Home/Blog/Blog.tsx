@@ -31,9 +31,9 @@ const blogs = [
 const Blog = () => {
   return (
     <div className="my-24 px-4">
-      <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold mb-2">Our Blogs</h1>
-        <p className="text-gray-600 max-w-xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold text-gray-800">Our Blogs</h2>
+        <p className="text-gray-600 mt-2">
           Explore expert tips, stationery trends, and organization hacks to
           boost your creativity and productivity!
         </p>

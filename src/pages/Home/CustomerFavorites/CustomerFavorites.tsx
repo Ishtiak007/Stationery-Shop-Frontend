@@ -18,9 +18,14 @@ const CustomerFavorites = () => {
 
   return (
     <div className="max-w-5xl mx-auto md:px-8 w-full mt-12 mb-8 my-10">
-      <h2 className="flex text-center text-2xl font-semibold items-center justify-center mb-4">
-        Customer Favorites
-      </h2>
+      <div className="text-center mb-12">
+        <h5 className="text-lg font-semibold text-teal-800 uppercase">
+          Customer Favorites
+        </h5>
+        <h2 className="text-3xl font-bold text-gray-800">
+          Top Picks by Our Customers
+        </h2>
+      </div>
       <CustomerFavoritesCard cards={featuredCards} />
       <div className="flex justify-center items-center my-10">
         <Link to="/all-product">
