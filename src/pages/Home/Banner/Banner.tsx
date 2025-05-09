@@ -46,7 +46,7 @@ const Banner = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="flex z-20 items-center justify-center max-w-lg md:w-full text-[10px] md:text-sm lg:text-base">
+        <div className="flex items-center justify-center max-w-lg md:w-full text-[10px] md:text-sm lg:text-base">
           <Link to="/register">
             <button type="submit" className="banner-button">
               Join Now

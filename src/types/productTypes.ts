@@ -65,6 +65,7 @@ export type TDiscount = {
 };
 
 export type TProducts = {
+  createdAt: string | number | Date;
   _id?: string; // make optional if used for creating new product
   name: string;
   author: string;

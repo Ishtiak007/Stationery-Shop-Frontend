@@ -24,9 +24,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import MegaMenu from "@/pages/Home/MegaMenu/MegaMenu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const token = useAppSelector(useCurrentToken);
   const cartData = useAppSelector((state) => state?.cart);
@@ -55,7 +57,7 @@ const Navbar = () => {
 
   const [position, setPosition] = useState("bottom");
   return (
-    <nav className="fixed bg-opacity-75 bg-teal-800 dark:bg-gray-900 text-white dark:text-white  overflow-hidden shadow-lg z-10 w-full">
+    <nav className="fixed bg-opacity-75 bg-teal-800 dark:bg-gray-900 text-white dark:text-white shadow-lg z-10 w-full">
       {/* Container */}
       <div className="container mx-auto flex justify-around items-center py-4 px-6">
         {/* Logo */}
@@ -66,7 +68,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Search Bar */}
-        <div className="hidden lg:flex justify-center items-center w-1/3">
+        <div className="hidden lg:flex justify-center items-center w-2/3">
           <div className="space-x-6 p-2 md:flex items-center justify-center text-white">
             <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/"}>Home</Link>
@@ -77,6 +79,26 @@ const Navbar = () => {
             <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/about"}>About</Link>
             </button>
+
+            {/* Mega menu */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <button className="NavigationLink font-medium relative after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
+                Featured
+              </button>
+
+              <div
+                className={`absolute left-1/2 top-full transform -translate-x-1/2 ${
+                  isHovered ? "visible opacity-100" : "invisible opacity-0"
+                } transition-opacity duration-200 z-50 min-w-[50vw] max-w-4xl`}
+              >
+                <MegaMenu />
+              </div>
+            </div>
+
             <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
               <Link to={"/contact-us"}>Contact Us</Link>
             </button>
