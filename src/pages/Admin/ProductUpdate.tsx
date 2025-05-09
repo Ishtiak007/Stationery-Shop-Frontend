@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import {
   useGetAllProductsQuery,
@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Store, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
 const ProductUpdate = () => {
   const { id } = useParams();
@@ -90,6 +90,11 @@ const ProductUpdate = () => {
 
   return (
     <Card className="max-w-6xl mx-auto mt-10 p-6 shadow-lg rounded-lg">
+      <button className="bg-teal-600 text-white px-4 py-2 rounded">
+        <Link to="/dashboard" relative="path">
+          Go back
+        </Link>
+      </button>
       <CardHeader>
         <CardTitle className="text-center gap-2 text-xl font-bold">
           you are Updating - {product?.name}
@@ -211,7 +216,10 @@ const ProductUpdate = () => {
               <Label htmlFor="isFeatured">Is this Featured Product?</Label>
             </div>
           </div>
-          <Button type="submit" className="w-full flex items-center gap-2">
+          <Button
+            type="submit"
+            className="w-full flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white"
+          >
             <Check /> Update
           </Button>
         </form>
