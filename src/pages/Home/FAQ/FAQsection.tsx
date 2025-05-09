@@ -50,7 +50,7 @@ export default function FAQSection() {
           <div key={index} className="border rounded-lg">
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:text-blue-600 focus:outline-none"
+              className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:text-teal-600 focus:outline-none"
             >
               {faq.question}
               <svg
