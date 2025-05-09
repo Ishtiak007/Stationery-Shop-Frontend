@@ -43,7 +43,6 @@ const Login = () => {
     }
   };
 
-  // ✅ Autofill Handlers
   const handleUserAutoFillButton = () => {
     setValue("email", "ishtiakahmed01999@gmail.com");
     setValue("password", "ishtiak123");
@@ -85,7 +84,7 @@ const Login = () => {
                 type="email"
                 placeholder="Email"
                 {...register("email")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -100,7 +99,7 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
                 {...register("password")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -108,7 +107,7 @@ const Login = () => {
             <div className="flex justify-center mt-4">
               <button
                 type="submit"
-                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2"
+                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2"
               >
                 Login
               </button>
@@ -125,13 +124,13 @@ const Login = () => {
           <div className="flex flex-col gap-4 md:flex-row">
             <button
               onClick={handleUserAutoFillButton}
-              className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center justify-center font-medium rounded-full transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2 w-full flex-1 bg-zinc-50"
+              className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center justify-center font-medium transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2 w-full flex-1 bg-zinc-50"
             >
               User
             </button>
             <button
               onClick={handleAdminAutoFillButton}
-              className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center justify-center font-medium rounded-full transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2 w-full flex-1 bg-zinc-50"
+              className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center justify-center font-medium transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2 w-full flex-1 bg-zinc-50"
             >
               Admin
             </button>

@@ -68,7 +68,7 @@ const Register = () => {
               <input
                 placeholder="Name"
                 {...register("name")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -83,7 +83,7 @@ const Register = () => {
                 type="email"
                 placeholder="Email"
                 {...register("email")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -98,7 +98,7 @@ const Register = () => {
                 type="password"
                 placeholder="Password"
                 {...register("password")}
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-bg"
+                className="mt-2 w-full px-4 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-primary-bg"
                 required
               />
             </div>
@@ -106,7 +106,7 @@ const Register = () => {
             <div className="flex justify-center mt-4">
               <Button
                 type="submit"
-                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
+                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium  
         transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white mt-2"
                 variant={"outline"}
                 disabled={FormData === null}
