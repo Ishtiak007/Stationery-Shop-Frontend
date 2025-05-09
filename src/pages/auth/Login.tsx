@@ -114,7 +114,7 @@ const Login = () => {
             </div>
           </form>
 
-          <div className="text-[15px] font-bold text-red-600">
+          <div className="text-[15px] font-medium text-red-600">
             Don't have any account?{" "}
             <a href="/register" className="text-blue-600 hover:underline">
               Register first

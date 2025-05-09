@@ -57,7 +57,7 @@ const ProductUpdate = () => {
       isFeatured: Boolean(data.isFeatured),
       tags:
         typeof data.tags === "string"
-          ? data.tags.split(",").map((tag) => tag.trim())
+          ? data.tags.split(",").map((tag: string) => tag.trim())
           : [],
       status: data.status,
       discount: data.discount?.percentage
@@ -75,13 +75,13 @@ const ProductUpdate = () => {
         productId: id,
         data: {
           ...productData,
-          file: data.productImg?.[0], // File passed to backend
+          file: data.productImg?.[0],
         },
       });
 
       if (res?.data?.message) {
         toast.success(res.data.message, { id: toastId });
-        navigate("/"); // ✅ Redirect to home page
+        navigate("/");
       }
     } catch {
       toast.error("Failed to update product", { id: toastId });
