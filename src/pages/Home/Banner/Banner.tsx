@@ -6,6 +6,7 @@ import banner2 from "../../../assets/images/banner2.jpg";
 import banner3 from "../../../assets/images/banner3.jpg";
 import banner4 from "../../../assets/images/banner4.jpg";
 import banner5 from "../../../assets/images/banner5.jpg";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const images = [banner1, banner2, banner3, banner4, banner5];
@@ -46,9 +47,11 @@ const Banner = () => {
 
         {/* Search Bar */}
         <div className="flex z-20 items-center justify-center max-w-lg md:w-full text-[10px] md:text-sm lg:text-base">
-          <button type="submit" className="banner-button">
-            Join Now
-          </button>
+          <Link to="/register">
+            <button type="submit" className="banner-button">
+              Join Now
+            </button>
+          </Link>
         </div>
       </div>
     </div>

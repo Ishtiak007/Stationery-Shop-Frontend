@@ -39,6 +39,7 @@ const ManageUsers = () => {
   const [deleteUser] = useDeleteUserMutation();
 
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
+  const [loadingUserIdTwo, setLoadingUserIdTwo] = useState<string | null>(null);
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +76,7 @@ const ManageUsers = () => {
   ) => {
     if (currentRole === newRole) return;
 
-    setLoadingUserId(userId); // Set loading state for this user
+    setLoadingUserIdTwo(userId); // Set loading state for this user
     try {
       // Call the mutation to update the status
       const res = await updateUserRole({
@@ -86,7 +87,7 @@ const ManageUsers = () => {
     } catch (error: any) {
       toast.error(error.data.message); // Show error message
     } finally {
-      setLoadingUserId(null); // Reset loading state
+      setLoadingUserIdTwo(null); // Reset loading state
     }
   };
 
@@ -221,9 +222,9 @@ const ManageUsers = () => {
                           <Button
                             className="border-neutral-300"
                             size="sm"
-                            disabled={loadingUserId === user._id}
+                            disabled={loadingUserIdTwo === user._id}
                           >
-                            {loadingUserId === user._id
+                            {loadingUserIdTwo === user._id
                               ? "Updating..."
                               : user.role}
                             <ChevronDown className="ml-1 h-4 w-4" />

@@ -1,15 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
@@ -32,19 +28,17 @@ const defaultValues = {
   sku: "SP0012",
   rating: 4,
   isFeatured: false,
-  tags: ["office", "technology", "pen", "digital"],
+  tags: "office,technology,pen,digital",
   discount: {
-    percentage: "15",
+    percentage: 15,
     validUntil: "2025-12-31T23:59:59.000Z",
   },
   status: "available",
-  productImg:
-    "https://res.cloudinary.com/damhxwmye/image/upload/v1744885323/%24Premium%20Notebook%20two.jpg",
 };
 
 const AddProducts = () => {
   const [addProduct] = useAddProductsMutation();
-  const { handleSubmit, register } = useForm({ defaultValues });
+  const { handleSubmit, register } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (
     data: Partial<TProducts>
@@ -55,16 +49,19 @@ const AddProducts = () => {
       author: data.author,
       description: data.description,
       category: data.category,
-      price: data.price,
-      stockQuantity: data.stockQuantity,
+      price: Number(data.price),
+      stockQuantity: Number(data.stockQuantity),
       brand: data.brand,
       color: data.color,
       size: data.size,
       material: data.material,
       sku: data.sku,
-      rating: data.rating,
-      isFeatured: data.isFeatured,
-      tags: data.tags,
+      rating: Number(data.rating),
+      isFeatured: Boolean(data.isFeatured),
+      tags:
+        typeof data.tags === "string"
+          ? (data.tags as string).split(",").map((tag) => tag.trim())
+          : [],
       status: data.status,
       discount: data.discount?.percentage
         ? {
@@ -79,11 +76,13 @@ const AddProducts = () => {
     const stringifyData = JSON.stringify(productData);
     const formData = new FormData();
     formData.append("data", stringifyData);
+
     if (data.productImg && data.productImg[0]) {
       formData.append("file", data.productImg[0]);
     } else {
       console.log("No image file selected.");
     }
+
     try {
       const res = await addProduct(formData);
       if (res.data) {
@@ -106,90 +105,45 @@ const AddProducts = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Label>Product Name</Label>
-              <Input
-                type="text"
-                {...register("name")}
-                placeholder="Enter product name"
-                required
-              />
+              <Input type="text" {...register("name")} required />
             </div>
             <div>
               <Label>Brand</Label>
-              <Input
-                type="text"
-                {...register("brand")}
-                placeholder="Enter brand"
-                required
-              />
+              <Input type="text" {...register("brand")} required />
             </div>
             <div className="md:col-span-2">
               <Label>Description</Label>
-              <Textarea
-                {...register("description")}
-                placeholder="Enter product description"
-                required
-              />
+              <Textarea {...register("description")} required />
             </div>
             <div>
               <Label>Price</Label>
-              <Input
-                type="number"
-                {...register("price")}
-                placeholder="Enter price"
-                required
-              />
+              <Input type="number" {...register("price")} required />
             </div>
             <div>
               <Label>Stock Quantity</Label>
-              <Input
-                type="number"
-                {...register("stockQuantity")}
-                placeholder="Enter stock quantity"
-                required
-              />
+              <Input type="number" {...register("stockQuantity")} required />
             </div>
             <div>
               <Label>Color</Label>
-              <Input
-                type="text"
-                {...register("color")}
-                placeholder="Enter color"
-                required
-              />
+              <Input type="text" {...register("color")} required />
             </div>
             <div>
               <Label>Size</Label>
-              <Input
-                type="text"
-                {...register("size")}
-                placeholder="Enter size"
-                required
-              />
+              <Input type="text" {...register("size")} required />
             </div>
             <div>
               <Label>Material</Label>
-              <Input
-                type="text"
-                {...register("material")}
-                placeholder="Enter material"
-                required
-              />
+              <Input type="text" {...register("material")} required />
             </div>
             <div>
               <Label>SKU</Label>
-              <Input
-                type="text"
-                {...register("sku")}
-                placeholder="Enter SKU"
-                required
-              />
+              <Input type="text" {...register("sku")} required />
             </div>
             <div>
               <Label>Rating</Label>
               <Input
                 type="number"
                 {...register("rating")}
-                placeholder="Enter rating"
                 min="1"
                 max="5"
                 required
@@ -197,36 +151,24 @@ const AddProducts = () => {
             </div>
             <div>
               <Label>Discount (%)</Label>
-              <Input
-                type="number"
-                {...register("discount")}
-                placeholder="Enter discount"
-              />
+              <Input type="number" {...register("discount.percentage")} />
+            </div>
+            <div>
+              <Label>Discount Valid Until</Label>
+              <Input type="date" {...register("discount.validUntil")} />
             </div>
             <div>
               <Label>Tags (comma separated)</Label>
-              <Input
-                type="text"
-                {...register("tags")}
-                placeholder="Enter product tags"
-              />
+              <Input type="text" {...register("tags")} />
             </div>
             <div>
               <Label>Author</Label>
-              <Input
-                type="text"
-                {...register("author")}
-                placeholder="Enter product author"
-                required
-              />
+              <Input type="text" {...register("author")} required />
             </div>
             <div>
               <Label>Category</Label>
-              <select
-                {...register("category")}
-                defaultValue="Pencils"
-                className="form-select"
-              >
+              <select {...register("category")} className="form-select">
+                <option value="">Select a category</option>
                 <option value="Notebooks">Notebooks</option>
                 <option value="Pens">Pens</option>
                 <option value="Pencils">Pencils</option>
@@ -242,16 +184,11 @@ const AddProducts = () => {
             </div>
             <div>
               <Label>Status</Label>
-              <Select {...register("status")}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent className="text-purple-600 bg-black">
-                  <SelectItem value="available">Available</SelectItem>
-                  <SelectItem value="out_of_stock">Out of Stock</SelectItem>
-                  <SelectItem value="discontinued">Discontinued</SelectItem>
-                </SelectContent>
-              </Select>
+              <select {...register("status")} className="form-select">
+                <option value="available">Available</option>
+                <option value="out_of_stock">Out of Stock</option>
+                <option value="discontinued">Discontinued</option>
+              </select>
             </div>
             <div>
               <Label>Product Image</Label>
