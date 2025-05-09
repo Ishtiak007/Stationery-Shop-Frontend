@@ -81,7 +81,7 @@ const ProductUpdate = () => {
 
       if (res?.data?.message) {
         toast.success(res.data.message, { id: toastId });
-        navigate("/");
+        navigate("/all-product");
       }
     } catch {
       toast.error("Failed to update product", { id: toastId });
@@ -89,10 +89,10 @@ const ProductUpdate = () => {
   };
 
   return (
-    <Card className="max-w-3xl mx-auto mt-10 p-6 shadow-lg rounded-lg">
+    <Card className="max-w-6xl mx-auto mt-10 p-6 shadow-lg rounded-lg">
       <CardHeader>
-        <CardTitle className="flex font-orbitron items-center gap-2 text-xl font-semibold">
-          <Store /> Update Product
+        <CardTitle className="text-center gap-2 text-xl font-bold">
+          you are Updating - {product?.name}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -103,7 +103,7 @@ const ProductUpdate = () => {
               <Input type="text" {...register("name")} required />
             </div>
             <div>
-              <Label>Brand</Label>
+              <Label>Brand Name</Label>
               <Input type="text" {...register("brand")} required />
             </div>
             <div className="md:col-span-2">
@@ -111,7 +111,7 @@ const ProductUpdate = () => {
               <Textarea {...register("description")} required />
             </div>
             <div>
-              <Label>Price</Label>
+              <Label>Product Price</Label>
               <Input type="number" {...register("price")} required />
             </div>
             <div>
@@ -119,27 +119,27 @@ const ProductUpdate = () => {
               <Input type="number" {...register("stockQuantity")} required />
             </div>
             <div>
-              <Label>Color</Label>
+              <Label>Product Color</Label>
               <Input type="text" {...register("color")} required />
             </div>
             <div>
-              <Label>Size</Label>
+              <Label>Product Size</Label>
               <Input type="text" {...register("size")} required />
             </div>
             <div>
-              <Label>Material</Label>
+              <Label>Product Material</Label>
               <Input type="text" {...register("material")} required />
             </div>
             <div>
-              <Label>SKU</Label>
+              <Label>Stock keeping unit</Label>
               <Input type="text" {...register("sku")} required />
             </div>
             <div>
-              <Label>Rating</Label>
+              <Label>Product Rating</Label>
               <Input type="number" {...register("rating")} min="1" max="5" />
             </div>
             <div>
-              <Label>Discount (%)</Label>
+              <Label>Product Discount (%)</Label>
               <Input type="number" {...register("discount.percentage")} />
             </div>
             <div>
@@ -147,33 +147,56 @@ const ProductUpdate = () => {
               <Input type="date" {...register("discount.validUntil")} />
             </div>
             <div>
-              <Label>Tags (comma separated)</Label>
+              <Label>Product Tags (use comma)</Label>
               <Input type="text" {...register("tags")} />
             </div>
             <div>
-              <Label>Author</Label>
+              <Label>Author Name</Label>
               <Input type="text" {...register("author")} required />
             </div>
-            <div>
+            <div className="border p-1 rounded-md">
               <Label>Category</Label>
-              <select {...register("category")} className="form-select">
-                <option value="">Select a category</option>
-                <option value="Notebooks">Notebooks</option>
+              <select
+                {...register("category")}
+                className="form-select cursor-pointer "
+              >
+                <option disabled value="">
+                  Select a category
+                </option>
                 <option value="Pens">Pens</option>
                 <option value="Pencils">Pencils</option>
+                <option value="Books">Books</option>
                 <option value="Markers">Markers</option>
                 <option value="Erasers">Erasers</option>
+                <option value="Highlighters">Highlighters</option>
                 <option value="Staplers">Staplers</option>
+                <option value="Notebooks">Notebooks</option>
                 <option value="Folders">Folders</option>
                 <option value="Calculators">Calculators</option>
                 <option value="Paper">Paper</option>
-                <option value="Books">Books</option>
+                <option value="Paper Clips">Paper Clips</option>
+                <option value="Glue">Glue</option>
+                <option value="Scissors">Scissors</option>
+                <option value="Tape">Tape</option>
+                <option value="Rulers">Rulers</option>
+                <option value="Sticky Notes">Sticky Notes</option>
+                <option value="Whiteboard">Whiteboard</option>
+                <option value="Sharpener">Sharpener</option>
+                <option value="Binder Clips">Binder Clips</option>
+                <option value="Index Cards">Index Cards</option>
+                <option value="Thumbtacks">Thumbtacks</option>
                 <option value="Other">Other</option>
               </select>
             </div>
-            <div>
+            <div className="border p-1 rounded-md">
               <Label>Status</Label>
-              <select {...register("status")} className="form-select">
+              <select
+                {...register("status")}
+                className="form-select cursor-pointer"
+              >
+                <option disabled value="">
+                  Select a Status
+                </option>
                 <option value="available">Available</option>
                 <option value="out_of_stock">Out of Stock</option>
                 <option value="discontinued">Discontinued</option>
@@ -185,7 +208,7 @@ const ProductUpdate = () => {
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox id="isFeatured" {...register("isFeatured")} />
-              <Label htmlFor="isFeatured">Featured Product?</Label>
+              <Label htmlFor="isFeatured">Is this Featured Product?</Label>
             </div>
           </div>
           <Button type="submit" className="w-full flex items-center gap-2">

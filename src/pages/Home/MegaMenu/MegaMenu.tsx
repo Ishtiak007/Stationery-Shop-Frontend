@@ -21,7 +21,7 @@ const MegaMenu = () => {
   return (
     <div className="relative z-[1000000] w-full bg-white shadow-xl rounded-xl p-4 lg:p-6 max-w-screen-2xl mx-auto">
       <h3 className="text-xl font-semibold mb-6 text-gray-800">
-        Featured Products
+        Recently Added
       </h3>
 
       {isLoading || isFetching ? (

@@ -9,9 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Store, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { TProducts } from "@/types/productTypes";
 import { useAddProductsMutation } from "@/redux/features/products/productsApi";
+import { useNavigate } from "react-router-dom";
 
 const defaultValues = {
   name: "Smart Pen Pro",
@@ -39,6 +40,7 @@ const defaultValues = {
 const AddProducts = () => {
   const [addProduct] = useAddProductsMutation();
   const { handleSubmit, register } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FieldValues> = async (
     data: Partial<TProducts>
@@ -87,6 +89,10 @@ const AddProducts = () => {
       const res = await addProduct(formData);
       if (res.data) {
         toast.success(res.data.message, { id: toastId });
+      }
+      if (res?.data?.message) {
+        toast.success(res.data.message, { id: toastId });
+        navigate("/all-product");
       }
     } catch {
       toast.error("Something went wrong", { id: toastId });
