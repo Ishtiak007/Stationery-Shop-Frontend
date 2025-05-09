@@ -11,6 +11,7 @@ import Cart from "@/pages/Cart/Cart";
 import OrderVerification from "@/pages/Cart/VerifyOrder";
 import About from "@/pages/About/About";
 import ContactUs from "@/pages/ContactUs/ContactUs";
+import ProductUpdate from "@/pages/Admin/ProductUpdate";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,15 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <ProtectedRoute role={["user", "admin"]}>
-        <Dashboard></Dashboard>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/product/update/:id",
+    element: (
+      <ProtectedRoute role={["admin"]}>
+        <ProductUpdate />
       </ProtectedRoute>
     ),
   },

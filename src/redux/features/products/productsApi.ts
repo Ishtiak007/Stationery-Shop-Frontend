@@ -30,22 +30,12 @@ const productsApi = baseApi.injectEndpoints({
     // add product
     AddProducts: builder.mutation({
       query: (data) => ({
-        url: "/products/create-product", // Endpoint for creating a product
-        method: "POST", // HTTP method POST for creating a new resource
-        body: data, // The product data to be sent in the request body
+        url: "/products/create-product",
+        method: "POST",
+        body: data,
       }),
-      invalidatesTags: ["product"], // Invalidate the product cache to refresh data after creation
+      invalidatesTags: ["product"],
     }),
-
-    // Update product
-    // updateProduct: builder.mutation({
-    //   query: ({ productId, data }) => ({
-    //     url: `/products/${productId}`,
-    //     method: "PATCH",
-    //     data: data,
-    //   }),
-    //   invalidatesTags: ["product"], // Invalidate the product cache to refresh data after update
-    // }),
 
     // Delete product
     deleteProduct: builder.mutation({
@@ -53,7 +43,27 @@ const productsApi = baseApi.injectEndpoints({
         url: `/products/${productId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["product"], // Invalidate the product cache to refresh data after delete
+      invalidatesTags: ["product"],
+    }),
+
+    // Update product with image
+    updateProductWithImage: builder.mutation({
+      query: ({ productId, data }) => {
+        const formData = new FormData();
+        if (data.file) {
+          formData.append("file", data.file);
+        }
+        const payload = { ...data };
+        delete payload.file;
+        formData.append("data", JSON.stringify(payload));
+
+        return {
+          url: `/products/update-product/${productId}`,
+          method: "PATCH",
+          body: formData,
+        };
+      },
+      invalidatesTags: ["product"],
     }),
   }),
 });
@@ -62,4 +72,5 @@ export const {
   useGetAllProductsQuery,
   useAddProductsMutation,
   useDeleteProductMutation,
+  useUpdateProductWithImageMutation,
 } = productsApi;

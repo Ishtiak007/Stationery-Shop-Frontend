@@ -64,25 +64,6 @@ const UserDashboardLayout: FC = () => {
         <h2 className="my-5 p-2 text-white font-orbitron font-bold text-center">
           User Dashboard
         </h2>
-        {/* <Menu
-          mode="inline"
-          className="text-[14px] bg-[#115E59]"
-          defaultSelectedKeys={["1"]}
-          onClick={(e) => setSelectedKey(e.key)}
-        >
-          {menuItems.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon}>
-              {item.label}
-            </Menu.Item>
-          ))}
-          <Menu.Item
-            key="5"
-            icon={<SlLogout size={25} />}
-            onClick={handleLogOut}
-          >
-            Logout
-          </Menu.Item>
-        </Menu> */}
         <Menu
           mode="inline"
           className="font-orbitron text-[14px] bg-[#115E59]"

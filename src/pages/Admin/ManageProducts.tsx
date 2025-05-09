@@ -15,6 +15,8 @@ import {
 import { MdDelete } from "react-icons/md";
 import { toast } from "sonner"; // Assuming you use toast for success/error messages
 import { useState } from "react"; // Import useState to manage modal visibility
+import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageProducts = () => {
   const {
@@ -88,13 +90,19 @@ const ManageProducts = () => {
                     <TableCell>${product.price}</TableCell>
                     <TableCell>{product.stockQuantity}</TableCell>{" "}
                     {/* Assuming stockQuantity is a field */}
-                    <TableCell>
+                    <TableCell className="flex gap-5">
                       {/* Delete Button */}
                       <MdDelete
                         size={18}
                         className="cursor-pointer text-red-500"
                         onClick={() => openModal(product._id)} // Open modal with the productId
                       />
+                      <Link to={`/product/update/${product._id}`}>
+                        <FaEdit
+                          size={18}
+                          className="cursor-pointer text-green-500"
+                        />
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
