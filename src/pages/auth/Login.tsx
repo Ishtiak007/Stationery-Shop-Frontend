@@ -11,12 +11,11 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      email: "ishtiak.sparrow98@gmail.com",
-      password: "ishtiak123",
-    },
-  });
+  const {
+    register,
+    handleSubmit,
+    setValue, // for autofill
+  } = useForm({});
 
   const [login] = useLoginMutation();
 
@@ -42,6 +41,17 @@ const Login = () => {
     } catch {
       toast.error("Something went wrong", { id: toastId });
     }
+  };
+
+  // ✅ Autofill Handlers
+  const handleUserAutoFillButton = () => {
+    setValue("email", "ishtiakahmed01999@gmail.com");
+    setValue("password", "ishtiak123");
+  };
+
+  const handleAdminAutoFillButton = () => {
+    setValue("email", "ishtiak.sparrow98@gmail.com");
+    setValue("password", "admin123");
   };
 
   return (
@@ -98,8 +108,7 @@ const Login = () => {
             <div className="flex justify-center mt-4">
               <button
                 type="submit"
-                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
-        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4 mt-2"
+                className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2"
               >
                 Login
               </button>
@@ -107,19 +116,25 @@ const Login = () => {
           </form>
 
           <div className="text-[15px] font-bold text-red-600">
-            Don't have an any account??{" "}
+            Don't have any account?{" "}
             <a href="/register" className="text-blue-600 hover:underline">
               Register first
             </a>
           </div>
 
-          <div>
-            <p>
-              <strong>Admin Email: </strong> ishtiak.sparrow98@gmail.com
-            </p>
-            <p>
-              <strong>Admin Pass: </strong> ishtiak123
-            </p>
+          <div className="flex flex-col gap-4 md:flex-row">
+            <button
+              onClick={handleUserAutoFillButton}
+              className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center justify-center font-medium rounded-full transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2 w-full flex-1 bg-zinc-50"
+            >
+              User
+            </button>
+            <button
+              onClick={handleAdminAutoFillButton}
+              className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center justify-center font-medium rounded-full transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white my-4 mt-2 w-full flex-1 bg-zinc-50"
+            >
+              Admin
+            </button>
           </div>
         </div>
       </div>

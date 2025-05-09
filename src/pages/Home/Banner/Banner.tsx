@@ -20,7 +20,7 @@ const Banner = () => {
         {images.map((image, index) => (
           <div key={index}>
             <div
-              className="w-full h-[400px] md:h-[500px] lg:h-[700px] bg-cover bg-center bg-transparent"
+              className="w-full h-[400px] md:h-[500px] lg:h-[680px] bg-cover bg-center bg-transparent"
               style={{
                 backgroundImage: `url(${image})`,
                 filter: "brightness(1.3)",
