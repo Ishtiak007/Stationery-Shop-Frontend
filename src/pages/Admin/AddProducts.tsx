@@ -94,10 +94,10 @@ const AddProducts = () => {
   };
 
   return (
-    <Card className="max-w-3xl mx-auto mt-10 p-6 shadow-lg rounded-lg">
+    <Card>
       <CardHeader>
         <CardTitle className="flex font-orbitron items-center gap-2 text-xl font-semibold">
-          <Store /> Add New Product
+          Add a New Product
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -136,11 +136,11 @@ const AddProducts = () => {
               <Input type="text" {...register("material")} required />
             </div>
             <div>
-              <Label>SKU</Label>
+              <Label>Stock Keeping Unit</Label>
               <Input type="text" {...register("sku")} required />
             </div>
             <div>
-              <Label>Rating</Label>
+              <Label>Product Rating</Label>
               <Input
                 type="number"
                 {...register("rating")}
@@ -155,36 +155,63 @@ const AddProducts = () => {
             </div>
             <div>
               <Label>Discount Valid Until</Label>
-              <Input type="date" {...register("discount.validUntil")} />
+              <Input
+                type="date"
+                {...register("discount.validUntil")}
+                required
+              />
             </div>
             <div>
-              <Label>Tags (comma separated)</Label>
+              <Label>Product Tags (use comma)</Label>
               <Input type="text" {...register("tags")} />
             </div>
             <div>
-              <Label>Author</Label>
+              <Label>Author name</Label>
               <Input type="text" {...register("author")} required />
             </div>
-            <div>
+            <div className="border p-1 rounded-md">
               <Label>Category</Label>
-              <select {...register("category")} className="form-select">
-                <option value="">Select a category</option>
-                <option value="Notebooks">Notebooks</option>
+              <select
+                {...register("category")}
+                className="form-select cursor-pointer "
+              >
+                <option disabled value="">
+                  Select a category
+                </option>
                 <option value="Pens">Pens</option>
                 <option value="Pencils">Pencils</option>
+                <option value="Books">Books</option>
                 <option value="Markers">Markers</option>
                 <option value="Erasers">Erasers</option>
+                <option value="Highlighters">Highlighters</option>
                 <option value="Staplers">Staplers</option>
+                <option value="Notebooks">Notebooks</option>
                 <option value="Folders">Folders</option>
                 <option value="Calculators">Calculators</option>
                 <option value="Paper">Paper</option>
-                <option value="Books">Books</option>
+                <option value="Paper Clips">Paper Clips</option>
+                <option value="Glue">Glue</option>
+                <option value="Scissors">Scissors</option>
+                <option value="Tape">Tape</option>
+                <option value="Rulers">Rulers</option>
+                <option value="Sticky Notes">Sticky Notes</option>
+                <option value="Whiteboard">Whiteboard</option>
+                <option value="Sharpener">Sharpener</option>
+                <option value="Binder Clips">Binder Clips</option>
+                <option value="Index Cards">Index Cards</option>
+                <option value="Thumbtacks">Thumbtacks</option>
                 <option value="Other">Other</option>
               </select>
             </div>
-            <div>
+            <div className="border p-1 rounded-md">
               <Label>Status</Label>
-              <select {...register("status")} className="form-select">
+              <select
+                {...register("status")}
+                className="form-select cursor-pointer"
+              >
+                <option disabled value="">
+                  Select a Status
+                </option>
                 <option value="available">Available</option>
                 <option value="out_of_stock">Out of Stock</option>
                 <option value="discontinued">Discontinued</option>
@@ -196,7 +223,7 @@ const AddProducts = () => {
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox id="isFeatured" {...register("isFeatured")} />
-              <Label htmlFor="isFeatured">Featured Product?</Label>
+              <Label htmlFor="isFeatured">Is this Featured Product?</Label>
             </div>
           </div>
           <Button type="submit" className="w-full flex items-center gap-2">

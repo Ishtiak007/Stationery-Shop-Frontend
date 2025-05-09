@@ -75,6 +75,7 @@ const ManageProducts = () => {
             <Table>
               <TableHeader>
                 <TableRow className="border-neutral-400 text-primary-text font-semibold text-lg">
+                  <TableHead>Product Image</TableHead>
                   <TableHead>Product Name</TableHead>
                   <TableHead>Category</TableHead>
                   <TableHead>Price</TableHead>
@@ -85,24 +86,33 @@ const ManageProducts = () => {
               <TableBody>
                 {allProducts?.data?.map((product) => (
                   <TableRow key={product._id} className="border-neutral-400">
+                    <TableCell>
+                      <img
+                        src={product.productImg}
+                        className="size-16 rounded-md"
+                        alt="Product Image"
+                      />
+                    </TableCell>
                     <TableCell>{product.name}</TableCell>
                     <TableCell>{product.category}</TableCell>
                     <TableCell>${product.price}</TableCell>
                     <TableCell>{product.stockQuantity}</TableCell>{" "}
                     {/* Assuming stockQuantity is a field */}
-                    <TableCell className="flex gap-5">
-                      {/* Delete Button */}
-                      <MdDelete
-                        size={18}
-                        className="cursor-pointer text-red-500"
-                        onClick={() => openModal(product._id)} // Open modal with the productId
-                      />
-                      <Link to={`/product/update/${product._id}`}>
-                        <FaEdit
-                          size={18}
-                          className="cursor-pointer text-green-500"
+                    <TableCell>
+                      <div className="flex gap-5 items-center">
+                        {/* Delete Button */}
+                        <MdDelete
+                          size={23}
+                          className="cursor-pointer text-red-500"
+                          onClick={() => openModal(product._id)} // Open modal with the productId
                         />
-                      </Link>
+                        <Link to={`/product/update/${product._id}`}>
+                          <FaEdit
+                            size={23}
+                            className="cursor-pointer text-green-500"
+                          />
+                        </Link>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
