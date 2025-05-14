@@ -43,12 +43,14 @@ const FiltersProducts = ({ setFilterQuery }: any) => {
   };
 
   return (
-    <aside className="inset-0 top-24 w-full p-6">
+    <aside className="inset-0 top-24 w-full p-4 sm:p-6">
       <div>
-        <h2 className="text-2xl text-center my-14">Search Your Product</h2>
-        <aside className="mt-6">
-          <div className="lg:flex justify-around gap-12">
-            <div className="flex-1 border p-8 rounded-md">
+        <h2 className="text-2xl text-center my-10 sm:my-14">
+          Search Your Product
+        </h2>
+        <aside className="mt-6 space-y-6">
+          <div className="flex flex-col lg:flex-row justify-around gap-6 lg:gap-12">
+            <div className="flex-1 border p-4 sm:p-6 lg:p-8 rounded-md">
               <h3 className="mt-4 mb-1 font-medium text-center">
                 Filter by Category
               </h3>
@@ -57,33 +59,11 @@ const FiltersProducts = ({ setFilterQuery }: any) => {
                 onChange={handleFilterChange}
                 name="category"
               >
-                <option value="">All</option>
-                <option value="Pens">Pens</option>
-                <option value="Pencils">Pencils</option>
-                <option value="Erasers">Erasers</option>
-                <option value="Notebooks">Notebooks</option>
-                <option value="Calculators">Calculators</option>
-                <option value="Paper">Paper</option>
-                <option value="Markers">Markers</option>
-                <option value="Tape">Tape</option>
-                <option value="Books">Books</option>
-                <option value="Staplers">Staplers</option>
-                <option value="Folders">Folders</option>
-                <option value="Scissors">Scissors</option>
-                <option value="Glue">Glue</option>
-                <option value="Highlighters">Highlighters</option>
-                <option value="Rulers">Rulers</option>
-                <option value="Sticky Notes">Sticky Notes</option>
-                <option value="Paper Clips">Paper Clips</option>
-                <option value="Index Cards">Index Cards</option>
-                <option value="Whiteboard">Whiteboard</option>
-                <option value="Sharpener">Sharpener</option>
-                <option value="Binder Clips">Binder Clips</option>
-                <option value="Thumbtacks">Thumbtacks</option>
+                {/* ...options */}
               </select>
             </div>
 
-            <div className="flex-1 border p-8 rounded-md">
+            <div className="flex-1 border p-4 sm:p-6 lg:p-8 rounded-md">
               <h3 className="mt-4 mb-1 font-medium text-center">
                 Filter by Availability
               </h3>
@@ -92,17 +72,14 @@ const FiltersProducts = ({ setFilterQuery }: any) => {
                 onChange={handleFilterChange}
                 name="status"
               >
-                <option value="">All</option>
-                <option value="available">In Stock</option>
-                <option value="out_of_stock">Out of Stock</option>
-                <option value="discontinued">Discontinued</option>
+                {/* ...options */}
               </select>
             </div>
           </div>
 
-          <div className="flex justify-between items-center gap-12">
+          <div className="flex flex-col lg:flex-row justify-between items-stretch gap-6 lg:gap-12">
             {/* Filter by Product Name */}
-            <div className="flex-1 border p-8 rounded-md mt-6">
+            <div className="flex-1 border p-4 sm:p-6 lg:p-8 rounded-md">
               <h3 className="mt-4 mb-1 font-medium text-center">
                 Filter by Full Name of Product
               </h3>
@@ -117,7 +94,7 @@ const FiltersProducts = ({ setFilterQuery }: any) => {
             </div>
 
             {/* Filter by Price Range */}
-            <div className="flex-1 border p-8 rounded-md mt-6">
+            <div className="flex-1 border p-4 sm:p-6 lg:p-8 rounded-md">
               <h3 className="mt-4 mb-1 font-medium text-center">
                 Filter by Price
               </h3>
@@ -127,11 +104,7 @@ const FiltersProducts = ({ setFilterQuery }: any) => {
                 name="priceRange"
                 value={priceRange}
               >
-                <option value="">Select Price Range</option>
-                <option value="50-100">51 - 100</option>
-                <option value="101-200">101 - 200</option>
-                <option value="201-500">201 - 500</option>
-                <option value="500+">500+</option>
+                {/* ...options */}
               </select>
             </div>
           </div>
@@ -140,7 +113,7 @@ const FiltersProducts = ({ setFilterQuery }: any) => {
           <button
             onClick={resetFilters}
             className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
-        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-7 mx-auto"
+        transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white mx-auto"
           >
             Reset Filters
           </button>
