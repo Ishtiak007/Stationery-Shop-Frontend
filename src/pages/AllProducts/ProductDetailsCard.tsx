@@ -43,7 +43,7 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
     try {
       dispatch(
         addToCart({
-          product: _id,
+          product: _id as string,
           name,
           price: price,
           quantity: 1,
@@ -73,7 +73,7 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
     try {
       dispatch(
         addToCart({
-          product: _id,
+          product: _id as string,
           name,
           price: price,
           quantity: 1,
@@ -116,19 +116,18 @@ const ProductDetailsCard = ({ product }: { product: TProducts }) => {
         <p className="text-sm text-blue-800">Brand: {brand || "N/A"}</p>
         <div className="flex gap-2 mt-4 items-center justify-center">
           <button onClick={handleAddToCart}>
-            <button
+            <div
               className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
         transition-all duration-300 ease-in-out hover:bg-teal-700 hover:text-white  my-4"
             >
               Add to Cart
-            </button>
+            </div>
           </button>
           <button
             onClick={handleBuyNow}
             className="hover:cursor-pointer border border-neutral-300 px-4 py-2 flex gap-3 items-center justify-center font-medium rounded-full 
         transition-all duration-300 ease-in-out bg-teal-700 hover:bg-white text-white hover:text-black  my-4"
           >
-            {" "}
             Buy Now
           </button>
         </div>

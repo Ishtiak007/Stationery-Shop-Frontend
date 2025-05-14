@@ -10,11 +10,13 @@ const CustomerFavorites = () => {
     (itm) => itm.isFeatured === true
   );
   const featuredCards =
-    isFeatured?.map((item) => ({
-      title: item.name,
-      src: item.productImg as string,
-      id: item._id,
-    })) || [];
+    isFeatured
+      ?.filter((item) => item._id) // skip items with missing _id
+      .map((item) => ({
+        title: item.name,
+        src: item.productImg as string,
+        id: item._id as string,
+      })) || [];
 
   return (
     <div className="max-w-5xl mx-auto md:px-8 w-full mt-12 mb-8 my-10">
