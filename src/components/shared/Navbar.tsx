@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// @typescript-eslint/no-explicit-any
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LogIn, LogOutIcon, Menu, X } from "lucide-react";
@@ -16,125 +15,141 @@ const Navbar = () => {
 
   const token = useAppSelector(useCurrentToken);
   const cartData = useAppSelector((state) => state?.cart);
-  const dispacth = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   let user: any;
   if (token) {
     user = verifyToken(token);
   }
 
-  const cartCount = cartData?.items[0]?.quantity || 0;
+  const cartCount =
+    cartData?.items?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
   const handleLogOut = () => {
-    dispacth(logOut());
+    dispatch(logOut());
   };
 
   return (
-    <nav className="fixed bg-opacity-75 bg-teal-800 dark:bg-gray-900 text-white dark:text-white shadow-lg z-10 w-full">
-      {/* Container */}
-      <div className="container mx-auto flex justify-around items-center py-4 px-6">
+    <nav className="fixed bg-teal-700/70 text-white w-full z-50 shadow-lg">
+      <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <span className="text-white  font-mono text-[8px] md:text:sm lg:text-xl font-bold ml-2">
-            STATIONERY STORE
-          </span>
+        <Link
+          to="/"
+          className="text-lg sm:text-lg font-bold font-mono text-white"
+        >
+          STATIONERY STORE
         </Link>
 
-        {/* Desktop Search Bar */}
-        <div className="hidden lg:flex justify-center items-center w-2/3">
-          <div className="space-x-6 p-2 md:flex items-center justify-center text-white">
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
-              <Link to={"/"}>Home</Link>
-            </button>
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
-              <Link to={"/all-product"}>Products</Link>
-            </button>
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex space-x-8 items-center">
+          <Link to="/" className="hover:text-teal-300 transition">
+            Home
+          </Link>
+          <Link to="/all-product" className="hover:text-teal-300 transition">
+            Products
+          </Link>
 
-            {/* Mega menu */}
+          {/* Mega Menu */}
+          <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="relative"
+          >
+            <button className="hover:text-teal-300 transition">Featured</button>
             <div
-              className="relative"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+              className={`absolute left-1/2 top-full transform -translate-x-1/2 ${
+                isHovered ? "visible opacity-100" : "invisible opacity-0"
+              } transition-opacity duration-200 z-50 min-w-[50vw] max-w-4xl bg-white text-black shadow-xl rounded-md p-4`}
             >
-              <button className="NavigationLink font-medium relative after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
-                Featured
-              </button>
-
-              <div
-                className={`absolute left-1/2 top-full transform -translate-x-1/2 ${
-                  isHovered ? "visible opacity-100" : "invisible opacity-0"
-                } transition-opacity duration-200 z-50 min-w-[50vw] max-w-4xl`}
-              >
-                <MegaMenu />
-              </div>
+              <MegaMenu />
             </div>
-
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
-              <Link to={"/about"}>About</Link>
-            </button>
-
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
-              <Link to={"/contact-us"}>Contact Us</Link>
-            </button>
-            <button className="relative font-medium after:block after:h-[4px] after:w-0 after:bg-teal-300 after:transition-all after:duration-300 after:absolute after:left-0 after:bottom-0 hover:after:w-full">
-              <Link to={"/dashboard"}>Dashboard</Link>
-            </button>
           </div>
+
+          <Link to="/about" className="hover:text-teal-300 transition">
+            About
+          </Link>
+          <Link to="/contact-us" className="hover:text-teal-300 transition">
+            Contact
+          </Link>
+          <Link to="/dashboard" className="hover:text-teal-300 transition">
+            Dashboard
+          </Link>
         </div>
 
-        {/* Icons and Menu */}
-        <div className="flex items-center justify-center md:space-x-4">
+        {/* Right Icons */}
+        <div className="flex items-center space-x-4">
           <Link to="/cart" className="relative">
-            <HiOutlineShoppingBag size={27} />
-            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {cartCount}
-            </span>
+            <HiOutlineShoppingBag size={24} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
           </Link>
 
           {user ? (
-            <div onClick={handleLogOut}>
-              <span className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center font-medium rounded-xl hover:bg-teal-800 hover:text-white my-4 mt-2 bg-teal-700 text-white text-sm sm:text-base">
-                <LogOutIcon className="w-6 h-6" /> Logout
-              </span>
-            </div>
+            <button
+              onClick={handleLogOut}
+              className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-sm rounded-xl transition"
+            >
+              <LogOutIcon className="w-5 h-5" />
+              Logout
+            </button>
           ) : (
-            <div className="hidden lg:flex">
-              <Link to={"/login"}>
-                <span className="hover:cursor-pointer border border-neutral-300 px-4 flex py-[6px] gap-3 items-center font-medium rounded-xl hover:bg-teal-800 hover:text-white my-4 mt-2 bg-teal-700 text-white text-sm sm:text-base">
-                  <LogIn className="w-6 h-6" /> Login
-                </span>
-              </Link>
-            </div>
+            <Link to="/login">
+              <div className="hidden lg:flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-sm rounded-xl transition">
+                <LogIn className="w-5 h-5" />
+                Login
+              </div>
+            </Link>
           )}
 
           {/* Mobile Menu Button */}
-          <Button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-white"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
           </Button>
         </div>
       </div>
 
-      {/* mobile */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-white shadow-md">
-          <Link
-            to="/"
-            className="block py-2 px-4 text-[10px] hover:bg-gray-200"
-          >
+        <div className="lg:hidden bg-gray-800 text-white px-4 pb-4">
+          <Link to="/" className="block py-2 hover:text-teal-300">
             Home
           </Link>
-          <Link
-            to="/all-product"
-            className="block py-2 px-4 text-[10px] hover:bg-gray-200"
-          >
+          <Link to="/all-product" className="block py-2 hover:text-teal-300">
             Products
           </Link>
-          <Link
-            to="/about"
-            className="block py-2 px-4 text-[10px] hover:bg-gray-200"
-          >
+          <Link to="/about" className="block py-2 hover:text-teal-300">
             About
           </Link>
+          <Link to="/contact-us" className="block py-2 hover:text-teal-300">
+            Contact
+          </Link>
+          <Link to="/dashboard" className="block py-2 hover:text-teal-300">
+            Dashboard
+          </Link>
+
+          {user ? (
+            <button
+              onClick={handleLogOut}
+              className="block w-full mt-4 bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="block mt-4 bg-teal-600 text-white py-2 rounded-lg text-center hover:bg-teal-700"
+            >
+              Login
+            </Link>
+          )}
         </div>
       )}
     </nav>
